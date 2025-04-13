@@ -23,9 +23,11 @@ app.use(cookieParser());
 
 
 import userRouter from "./routes/user.routes.js";
+import bloodRequestRouter from "./routes/bloodRequest.routes.js";
 
 
 app.use("/api/v1/users", userRouter);
+app.use("/api/v1/blood-requests", bloodRequestRouter);
 
 
 export {app}
