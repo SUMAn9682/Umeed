@@ -39,7 +39,7 @@ export default function RootLayout({
             <header>
               <Navbar />
             </header>
-            <main>{children}</main>
+            <main className="pt-10">{children}</main>
             <Toaster />
           </ThemeProvider>
       </body>
