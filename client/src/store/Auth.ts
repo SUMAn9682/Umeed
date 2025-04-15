@@ -4,6 +4,7 @@ import { immer } from "zustand/middleware/immer";
 
 interface IAuthStore {
     userId: string | null;
+    bloodGroup: string | null;
     isAuthenticated: boolean;
     hydrated: boolean;
 
@@ -18,7 +19,8 @@ export const useAuthStore = create<IAuthStore>()(
             userId: null,
             isAuthenticated: false,
             hydrated: false,
-
+            bloodGroup: null,
+            
             setHydrated() {
                 set({ hydrated: true })
             },
