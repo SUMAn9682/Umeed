@@ -24,10 +24,12 @@ app.use(cookieParser());
 
 import userRouter from "./routes/user.routes.js";
 import bloodRequestRouter from "./routes/bloodRequest.routes.js";
+import chatRouter from "./routes/chatbot.routes.js";
 
 
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/blood-requests", bloodRequestRouter);
+app.use("/api/v1/chat", chatRouter);
 
 
 export {app}
