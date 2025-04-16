@@ -44,7 +44,7 @@ const Page = () => {
       
       if (response.status === 200) {
         toast("Login successful");
-        login(response.data.data.user._id)
+        login(response.data.data.user._id, response.data.data.user.info.bloodGroup)
         router.push("/dashboard");
       } else {
         toast.error(response.data.message || "An error occurred during login. Please try again.");

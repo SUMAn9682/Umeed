@@ -9,7 +9,7 @@ interface IAuthStore {
     hydrated: boolean;
 
     setHydrated(): void;
-    login(userId: string): void;
+    login(userId: string, bloodGroup: string): void;
     logout(): void;
 }
 
@@ -25,12 +25,12 @@ export const useAuthStore = create<IAuthStore>()(
                 set({ hydrated: true })
             },
 
-            login(userId: string) {
-                set({ userId, isAuthenticated: true })
+            login(userId: string, bloodGroup: string) {
+                set({ userId, isAuthenticated: true, bloodGroup })
             },
 
             logout() {
-                set({ userId: null, isAuthenticated: false })
+                set({ userId: null, isAuthenticated: false, bloodGroup: null })
             },
             
         })),

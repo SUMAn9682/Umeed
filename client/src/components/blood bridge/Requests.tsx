@@ -1,3 +1,4 @@
+"use client";
 import { useEffect, useState } from "react";
 import { ArrowRight, ChevronLeft, ChevronRight, HandHelping, Loader2 } from "lucide-react";
 import { useAuthStore } from "@/store/Auth";
@@ -20,39 +21,14 @@ import { Button } from "../ui/button";
 import { Badge } from "../ui/badge";
 import BeVolunteer from "./BeVolunteer";
 import Link from "next/link";
+import { BloodRequest } from "@/types/bloodRequest";
 
 interface Requests {
-  bloodRequests: Request[];
+  bloodRequests: BloodRequest[];
   hasNext: boolean;
   hasPrev: boolean;
   currentPage: number;
   totalPages: number;
-}
-
-interface Address {
-  state: string;
-  district: string;
-  city: string;
-}
-
-interface ContactDetails {
-  email: string;
-  phone: string;
-}
-
-interface Request {
-  _id: string;
-  bloodGroup: string;
-  urgency: string;
-  message: string;
-  contactDetails: ContactDetails;
-  status: string;
-  address: Address;
-  volunteers: [
-    {
-      user: string;
-    }
-  ];
 }
 
 const validBloodGroups = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
@@ -249,7 +225,7 @@ function Requests() {
                   </div>
                 </CardContent>
                 <CardFooter className="flex justify-between">
-                  <Link href={`/bloodbridge/request/${request._id}`}
+                  <Link href={`/blood-bridge/request/${request._id}`}
                   className="text-secondary flex items-center hover:underline font-semibold"
                   >
                     View details <ArrowRight className="w-4 h-4 ml-2" />

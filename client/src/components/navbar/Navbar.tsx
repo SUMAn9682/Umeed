@@ -21,6 +21,21 @@ function Navbar() {
       auth: true,
     },
     {
+      name: "Blood Bridge",
+      href: "/blood-bridge",
+      auth: true,
+    },
+    {
+      name: "About Us",
+      href: "/about",
+      auth: false,
+    },
+    {
+      name: "Contact Us",
+      href: "/contact",
+      auth: false,
+    },
+    {
       name: "Login",
       href: "/login",
       auth: false,
