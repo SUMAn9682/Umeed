@@ -68,6 +68,7 @@ const Page = () => {
   const router = useRouter()
   const [loading, setLoading] = useState(false);
   const [selectedState, setSelectedState] = useState<any>(null);
+  // @ts-ignore
   const [selectedCity, setSelectedCity] = useState<any>(null);
   const [formErrors, setFormErrors] = useState<z.ZodFormattedError<FormData> | null>(null);
 
