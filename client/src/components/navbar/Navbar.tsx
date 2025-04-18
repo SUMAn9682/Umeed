@@ -17,7 +17,7 @@ function Navbar() {
   const navItems = [
     {
       name: "Umeed",
-      href: "/",
+      href: "/umeed",
       auth: true,
     },
     {
