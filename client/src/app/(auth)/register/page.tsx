@@ -216,7 +216,7 @@ const Page = () => {
       }
       // @ts-expect-error - We're handling complex error structures
       return formErrors[path]?._errors?.[0];
-    } catch (_) {
+    } catch {
       return undefined;
     }
   };
