@@ -118,7 +118,7 @@ export const useChatStore = create<ChatStore>((set, get) => ({
   updateSessionTitle: async (sessionId: string, title: string) => {
     set({ isLoading: true, error: null });
     try {
-      const updatedSession = await chatApi.updateSessionTitle(sessionId, title);
+      await chatApi.updateSessionTitle(sessionId, title);
       
       // Update local state
       const { sessions, currentSession } = get();
