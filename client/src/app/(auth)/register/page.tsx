@@ -68,8 +68,7 @@ const Page = () => {
   const router = useRouter()
   const [loading, setLoading] = useState(false);
   const [selectedState, setSelectedState] = useState<IState | null>(null);
-  //@ts-ignore
-  const [selectedCity, setSelectedCity] = useState<ICity | null>(null);
+  const [, setSelectedCity] = useState<ICity | null>(null);
   const [formErrors, setFormErrors] = useState<z.ZodFormattedError<FormData> | null>(null);
 
   const states = State.getStatesOfCountry("IN");
