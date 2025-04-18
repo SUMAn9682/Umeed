@@ -22,6 +22,7 @@ import { Badge } from "../ui/badge";
 import BeVolunteer from "./BeVolunteer";
 import Link from "next/link";
 import { BloodRequest } from "@/types/bloodRequest";
+import { AxiosError } from "axios";
 
 interface Requests {
   bloodRequests: BloodRequest[];
@@ -70,8 +71,12 @@ function Requests() {
         }
         setRequests(data);
       }
-    } catch (error: any) {
-      setError(error?.message || "Failed to fetch requests");
+    } catch (error: unknown) {
+      if (error instanceof AxiosError) {
+        setError(error.message);
+      } else {
+        setError("An unexpected error occurred.");
+      }
     } finally {
       setLoading(false);
     }

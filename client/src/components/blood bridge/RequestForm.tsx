@@ -40,8 +40,8 @@ type FormData = z.infer<typeof requestFormSchema>;
 function RequestForm() {
   const router = useRouter()
   const [formData, setFormData] = useState<FormData>({
-    bloodGroup: "" as any,
-    urgency: "" as any,
+    bloodGroup: "" as "A+" | "A-" | "B+" | "B-" | "AB+" | "AB-" | "O+" | "O-",
+    urgency: "" as "low" | "medium" | "high",
     message: "",
     phone: "",
     email: "",
@@ -104,8 +104,8 @@ function RequestForm() {
       if (response.status === 201) {
         setErrors({});
         setFormData({
-          bloodGroup: "" as any,
-          urgency: "" as any,
+          bloodGroup: "" as "A+" | "A-" | "B+" | "B-" | "AB+" | "AB-" | "O+" | "O-",
+          urgency: "" as "low" | "medium" | "high",
           message: "",
           phone: "",
           email: "",

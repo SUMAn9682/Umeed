@@ -17,6 +17,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Loader2, Mail, ShieldCheck } from "lucide-react";
 import { useAuthStore } from "@/store/Auth";
+import { AxiosError } from "axios";
 
 const Page = () => {
   const { login } = useAuthStore()
@@ -49,11 +50,10 @@ const Page = () => {
       } else {
         toast.error(response.data.message || "An error occurred during login. Please try again.");
       }
-    } catch (error: any) {
-      if (error.response?.status === 401) {
-        toast.error("Invalid email or password.");
-      } else {
-        toast.error("Something went wrong. Please try again later.");
+    } catch (error: unknown) {
+      if ( error instanceof AxiosError ) {
+        const errorMessage = error.response?.data.message || "An error occurred during login. Please try again.";
+        toast.error(errorMessage);
       }
     } finally {
       setLoading(false);
@@ -162,7 +162,7 @@ const Page = () => {
 
         <CardFooter className="relative">
           <p className="text-sm text-muted-foreground text-center w-full">
-            Don't have an account?{" "}
+            Don&apos;t have an account?{" "}
             <Link
               href="/register"
               className="text-primary hover:text-primary/80 transition-colors font-medium"

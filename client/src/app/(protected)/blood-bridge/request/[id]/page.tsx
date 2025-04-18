@@ -23,7 +23,7 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
             try {
                 const response = await api.get(`blood-requests/${id}`);
                 setRequest(response.data.data);
-            } catch (error: any) {
+            } catch {
                 setError("Failed to load request details. Please try again.");
             } finally {
                 setLoading(false);

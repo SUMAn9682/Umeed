@@ -262,7 +262,7 @@ export default function Home() {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.5 }}
                   >
-                    <p className="text-sm">Hello! I'm experiencing a headache and slight fever since yesterday.</p>
+                    <p className="text-sm">Hello! I&apos;m experiencing a headache and slight fever since yesterday.</p>
                   </motion.div>
                   <motion.div 
                     className="bg-primary/10 p-3 rounded-lg rounded-tr-none max-w-xs ml-auto"
@@ -278,7 +278,7 @@ export default function Home() {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.5, delay: 1 }}
                   >
-                    <p className="text-sm">It's about a 6. The pain is mostly in my forehead.</p>
+                    <p className="text-sm">It&apos;s about a 6. The pain is mostly in my forehead.</p>
                   </motion.div>
                   <motion.div 
                     className="bg-primary/10 p-3 rounded-lg rounded-tr-none max-w-xs ml-auto"
@@ -286,7 +286,7 @@ export default function Home() {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.5, delay: 1.5 }}
                   >
-                    <p className="text-sm">Thank you. And what's your temperature? Have you taken any medication so far?</p>
+                    <p className="text-sm">Thank you. And what&apos;s your temperature? Have you taken any medication so far?</p>
                   </motion.div>
                 </div>
                 <div className="relative">

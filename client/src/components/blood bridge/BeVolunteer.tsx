@@ -22,7 +22,7 @@ const handleSubmit = async (canShare: boolean) => {
     if (res.status === 200) {
       toast.success("Details shared successfully.");
     }
-  } catch (error: any) {
+  } catch {
     toast.error("Something went wrong. Please try again later.");
   }
 };

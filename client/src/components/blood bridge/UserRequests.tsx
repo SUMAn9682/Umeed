@@ -19,6 +19,7 @@ import { Dialog, DialogHeader, DialogContent, DialogTitle } from "../ui/dialog";
 import { ScrollArea } from "../ui/scroll-area";
 import { useAuthStore } from "@/store/Auth";
 import { BloodRequest } from "@/types/bloodRequest";
+import { AxiosError } from "axios";
 
 interface RequestCardProps {
   request: BloodRequest;
@@ -157,8 +158,12 @@ const UserRequests = () => {
       if (response.status === 200) {
         setRequests(response.data.data.bloodRequests);
       }
-    } catch (error: any) {
-      setError(error.message || "Failed to fetch blood requests");
+    } catch (error: unknown) {
+      if (error instanceof AxiosError) {
+        setError(error.message);
+      } else {
+        setError("An unknown error occurred.");
+      }
     } finally {
       setIsLoading(false);
     }
@@ -195,8 +200,12 @@ const UserRequests = () => {
           })
         );
       }
-    } catch (error: any) {
-      setError(`Failed to mark request as completed: ${error.message}`);
+    } catch (error: unknown) {
+      if (error instanceof AxiosError) {
+        setError(error.message);
+      } else {
+        setError("An unknown error occurred.");
+      }
     }
   }
 
@@ -208,8 +217,12 @@ const UserRequests = () => {
           prevRequests.filter((request) => request._id !== id)
         );
       }
-    } catch (error: any) {
-      setError(`Failed to delete request: ${error.message}`);
+    } catch (error: unknown) {
+      if (error instanceof AxiosError) {
+        setError(error.message);
+      } else {
+        setError("An unknown error occurred.");
+      }
     }
   };
 

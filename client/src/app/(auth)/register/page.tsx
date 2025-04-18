@@ -14,7 +14,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { api } from "@/helpers/api"
-import { State, City } from "country-state-city";
+import { State, City, IState, ICity } from "country-state-city"; // Added proper types
 import { 
   Loader2, 
   ShieldCheck, 
@@ -67,9 +67,9 @@ type FormData = z.infer<typeof formSchema>;
 const Page = () => {
   const router = useRouter()
   const [loading, setLoading] = useState(false);
-  const [selectedState, setSelectedState] = useState<any>(null);
-  // @ts-ignore
-  const [selectedCity, setSelectedCity] = useState<any>(null);
+  const [selectedState, setSelectedState] = useState<IState | null>(null);
+  //@ts-ignore
+  const [selectedCity, setSelectedCity] = useState<ICity | null>(null);
   const [formErrors, setFormErrors] = useState<z.ZodFormattedError<FormData> | null>(null);
 
   const states = State.getStatesOfCountry("IN");
@@ -130,7 +130,7 @@ const Page = () => {
 
   const handleStateChange = (stateName: string) => {
     const state = states.find((s) => s.name === stateName);
-    setSelectedState(state);
+    setSelectedState(state || null);
 
     setFormData((prev) => ({
       ...prev,
@@ -143,18 +143,20 @@ const Page = () => {
   };
 
   const handleCityChange = (cityName: string) => {
-    const city = City.getCitiesOfState("IN", selectedState?.isoCode || "").find(
-      (c) => c.name === cityName
-    );
-    setSelectedCity(city);
+    if (selectedState?.isoCode) {
+      const city = City.getCitiesOfState("IN", selectedState.isoCode).find(
+        (c) => c.name === cityName
+      );
+      setSelectedCity(city || null);
 
-    setFormData((prev) => ({
-      ...prev,
-      address: {
-        ...prev.address,
-        city: cityName,
-      },
-    }));
+      setFormData((prev) => ({
+        ...prev,
+        address: {
+          ...prev.address,
+          city: cityName,
+        },
+      }));
+    }
   };
 
   const validateForm = () => {
@@ -191,8 +193,9 @@ const Page = () => {
         toast("Your account has been created. Please log in.")
         router.push("/login");
       }
-    } catch (error: any) {
-      if (error.response?.status === 409) {
+    } catch (error: unknown) {
+      const apiError = error as { response?: { status: number } };
+      if (apiError.response?.status === 409) {
         toast.error("Email or phone number already exists")
       } else {
         toast.error("An error occurred. Please try again later.");
@@ -209,12 +212,12 @@ const Page = () => {
     try {
       if (path.includes('.')) {
         const [parent, child] = path.split('.');
-        // @ts-ignore - We're handling any type errors in the try/catch
+        // @ts-expect-error - We're handling complex nested errors
         return formErrors[parent]?.fields?.[child]?._errors?.[0];
       }
-      // @ts-ignore - We're handling any type errors in the try/catch
+      // @ts-expect-error - We're handling complex error structures
       return formErrors[path]?._errors?.[0];
-    } catch (e) {
+    } catch (_) {
       return undefined;
     }
   };
