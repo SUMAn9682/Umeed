@@ -190,15 +190,26 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
 
         const { accessToken, refreshToken: newRefreshToken } = await generateAccessAndRefreshTokens(user._id);
 
-        const options = {
+        const accessOptions = {
             httpOnly: true,
-            secure: process.env.NODE_ENV === "production"
+            // secure: process.env.NODE_ENV === "production"
+            secure: true,
+            sameSite: "none",
+            maxAge: parseInt(process.env.ACCESS_TOKEN_EXPIARY) * 1000
+        };
+
+        const refreshOptions = {
+            httpOnly: true,
+            // secure: process.env.NODE_ENV === "production"
+            secure: true,
+            sameSite: "none",
+            maxAge: parseInt(process.env.REFRESH_TOKEN_EXPIARY) * 1000
         };
 
         return res
             .status(200)
-            .cookie("accessToken", accessToken, options)
-            .cookie("refreshToken", newRefreshToken, options)
+            .cookie("accessToken", accessToken, accessOptions)
+            .cookie("refreshToken", newRefreshToken, refreshOptions)
             .json(
                 new ApiResponse(
                     200,
