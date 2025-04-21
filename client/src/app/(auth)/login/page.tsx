@@ -50,6 +50,9 @@ const Page = () => {
         localStorage.setItem("refreshToken", response.data.data.refreshToken);
         localStorage.setItem("userId", response.data.data.user._id);
 
+        document.cookie = `accessToken=${response.data.data.accessToken}; path=/; max-age=86400`;
+        document.cookie = `refreshToken=${response.data.data.refreshToken}; path=/; max-age=864000`;
+
         toast("Login successful");
         login(response.data.data.user._id, response.data.data.user.info.bloodGroup)
         router.push("/dashboard");

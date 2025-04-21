@@ -77,6 +77,11 @@ function Navbar() {
     try {
       const res = await api.post("/users/logout", {}, { withCredentials: true });
       if (res.status === 200) {
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("refreshToken");
+        localStorage.removeItem("userId");
+        document.cookie = "accessToken=null, path=/; max-age=0";
+        document.cookie = "refreshToken=null, path=/; max-age=0";
         toast.success("Logout successful");
         router.replace("/");
         logout();
