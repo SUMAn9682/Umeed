@@ -1,4 +1,3 @@
-// components/umeed/Sidebar.tsx
 "use client";
 
 import { useEffect } from "react";
@@ -31,7 +30,7 @@ export const Sidebar = ({ bloodGroup }: SidebarProps) => {
   }, [fetchSessions]);
   
   return (
-    <div className="w-full h-full flex flex-col bg-sidebar text-sidebar-foreground border-r border-sidebar-border">
+    <div className="w-full h-full flex flex-col bg-sidebar text-sidebar-foreground border-r border-sidebar-border pt-10">
       <div className="p-4">
         <div className="flex items-center justify-between mb-4">
           <h2 className="font-semibold text-lg">Umeed</h2>
