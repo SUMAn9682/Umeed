@@ -5,7 +5,6 @@ import { motion } from 'framer-motion';
 export default function Home() {
   return (
     <div className="min-h-screen bg-background text-foreground">
-      {/* Enhanced Hero Section with Framer Motion */}
       <section className="relative overflow-hidden pt-20 pb-16 md:pt-32 md:pb-24">
         <motion.div 
           className="absolute top-0 left-0 w-full h-full opacity-5"
