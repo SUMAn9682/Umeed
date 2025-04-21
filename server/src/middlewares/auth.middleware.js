@@ -3,7 +3,7 @@ import { User } from '../models/user.model.js';
 import { ApiError } from '../utils/apiError.js';
 import { asyncHandler } from '../utils/asynchandler.js';
 export const verifyJWT = asyncHandler( async (req, _, next) => {
-    let token = req.cookies.accessToken || req.header("Authorization")?.replace("Bearer ", "")
+    let token = req.cookies?.accessToken || req.header("Authorization")?.replace("Bearer ", "") || req.body?.accessToken;
 
     if(!token) {
         throw new ApiError(401, "Unauthorized: Access token is required")

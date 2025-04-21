@@ -13,8 +13,8 @@ console.log(process.env.CORS_ORIGIN);
 app.use(cors({
     origin: process.env.CORS_ORIGIN,
     credentials: true,
-    methods: ["GET", "POST", "PATCH", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"],
+    // methods: ["GET", "POST", "PATCH", "DELETE"],
+    // allowedHeaders: ["Content-Type", "Authorization"],
 }))
 console.log("app.js", process.env.CORS_ORIGIN);
 

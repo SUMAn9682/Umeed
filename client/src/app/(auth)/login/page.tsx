@@ -44,6 +44,12 @@ const Page = () => {
       const response = await api.post("/users/login", formData);
       
       if (response.status === 200) {
+
+        // Store the access token in local storage as backup
+        localStorage.setItem("accessToken", response.data.data.accessToken);
+        localStorage.setItem("refreshToken", response.data.data.refreshToken);
+        localStorage.setItem("userId", response.data.data.user._id);
+
         toast("Login successful");
         login(response.data.data.user._id, response.data.data.user.info.bloodGroup)
         router.push("/dashboard");
