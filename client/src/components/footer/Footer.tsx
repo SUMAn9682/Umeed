@@ -7,11 +7,6 @@ const Footer = () => {
       <div className="absolute inset-0 opacity-10 pointer-events-none bg-gradient-to-tr from-primary/60 via-accent/40 to-secondary/50 blur-2xl" />
 
       <div className="relative z-10 container mx-auto text-center space-y-8">
-        {/* Title */}
-        <h2 className="text-3xl font-semibold tracking-wide animate__animated animate__fadeInDown animate__delay-1s">
-          Umeed — Empowering Lives Through AI & Compassion ❤️
-        </h2>
-
         {/* Description */}
         <p className="text-sm text-muted-foreground max-w-2xl mx-auto leading-relaxed">
           &copy; {new Date().getFullYear()} Umeed. Revolutionizing healthcare with AI-driven solutions, making life-saving connections between blood donors and those in need.
