@@ -32,6 +32,19 @@ const ChatMessage = ({ message }: ChatMessageProps) => {
         <p className="text-sm font-medium mb-1">
           {isUser ? "You" : "Medical Assistant"}
         </p>
+        {/* Display image if present */}
+        {message.attachment?.url && (
+                <div className="mb-2">
+                  <img 
+                    src={message.attachment.url} 
+                    alt="Medical document" 
+                    className="rounded max-h-48 max-w-full object-contain"
+                  />
+                  {message.attachment.uploading && (
+                    <div className="mt-1 text-xs text-blue-200">Uploading...</div>
+                  )}
+                </div>
+              )}
         <div className="prose prose-sm max-w-none">
           <ReactMarkdown>
             {message.content}

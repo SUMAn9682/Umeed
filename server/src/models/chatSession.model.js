@@ -22,6 +22,17 @@ const ChatSessionSchema = new mongoose.Schema({
       type: String,
       required: true
     },
+    // Update attachment to use Cloudinary
+    attachment: {
+      type: {
+        type: String,
+        enum: ['image', 'document', null],
+        default: null
+      },
+      url: String,
+      public_id: String,
+      originalName: String
+    },
     timestamp: {
       type: Date,
       default: Date.now
