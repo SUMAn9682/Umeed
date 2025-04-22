@@ -37,7 +37,10 @@ const Footer = () => {
 
         {/* Tagline */}
         <p className="text-xs text-muted-foreground italic">
-          Built with 💉 + ❤️ by the Umeed Team — for a smarter, healthier future.
+          Built with 💉 + ❤️ by the Small Brains — for a smarter, healthier future.
+        </p>
+        <p className="text-xs text-muted-foreground italic">
+          Join us in making a difference today!
         </p>
       </div>
     </footer>
