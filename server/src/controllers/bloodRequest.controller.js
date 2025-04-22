@@ -2,6 +2,8 @@ import { BloodRequest } from "../models/bloodRequest.model.js";
 import { ApiError } from "../utils/apiError.js";
 import { ApiResponse } from "../utils/apiResponse.js";
 import { asyncHandler } from "../utils/asynchandler.js";
+import { User } from "../models/user.model.js";
+import { sendBloodRequestEmail } from "../service/email.js";
 
 
 
@@ -29,11 +31,57 @@ const createBloodRequest = asyncHandler(async (req, res) => {
             status,
             address,
         });
+
+        const { city, district, state } = address;
+        
+        // Find matching users with hierarchical location search
+        let users = await User.find({ 
+            "info.bloodGroup": bloodGroup, 
+            "address.city": city,
+            _id: { $ne: req.user._id }
+        });
+        
+        if (users.length === 0) {
+            users = await User.find({ 
+                "info.bloodGroup": bloodGroup, 
+                "address.district": district,
+                _id: { $ne: req.user._id } 
+            });
+        }
+        
+        if (users.length === 0) {
+            users = await User.find({ 
+                "info.bloodGroup": bloodGroup, 
+                "address.state": state,
+                _id: { $ne: req.user._id } 
+            });
+        }
+
+        const userEmails = await Promise.all(users.map(async (user) => {
+            try {
+               const emailSent = await sendBloodRequestEmail({
+                    to: user.email,
+                    bloodGroup,
+                    city,
+                    requestId: savedBloodRequest._id,
+                });
+
+                return emailSent;   
+            } catch (error) {
+                console.error("Error fetching user email:", error);
+                return null; // Skip this user if there's an error
+                
+            }
+        }));
+
+
+        const successfulEmails = userEmails.filter(email => email !== null);
         
         
         return res.status(201).json(
             new ApiResponse(201, "Blood request created successfully", {
                 bloodRequest: savedBloodRequest,
+                emailSent: successfulEmails.length > 0,
             })
         );
     } catch (error) {
