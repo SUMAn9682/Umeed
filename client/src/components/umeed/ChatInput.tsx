@@ -7,13 +7,14 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { SendHorizontal, Paperclip, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { toast } from "sonner";
 
 export const ChatInput = () => {
   const [message, setMessage] = useState("");
   const { sendMessage, isLoading, uploadImage } = useChatStore();
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [previewImage, setPreviewImage] = useState<string | null>(null);
-  const [dragActive, setDragActive] = useState(false);
+  const [, setDragActive] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   
   const handleSubmit = async (e: React.FormEvent) => {
@@ -84,13 +85,13 @@ export const ChatInput = () => {
   const handleFile = (file: File) => {
     // Check if file is an image or PDF
     if (!file.type.match('image.*') && file.type !== 'application/pdf') {
-      alert('Please upload an image or PDF file.');
+      toast('Please upload an image or PDF file.');
       return;
     }
     
     // Check file size (5MB limit)
     if (file.size > 5 * 1024 * 1024) {
-      alert('File size should not exceed 5MB.');
+      toast('File size should not exceed 5MB.');
       return;
     }
     

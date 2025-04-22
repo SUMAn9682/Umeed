@@ -12,6 +12,7 @@ import {
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { NumberTicker } from "@/components/magicui/number-ticker";
+import Footer from "@/components/footer/Footer";
 
 export default function Home() {
   const router = useRouter();
@@ -677,6 +678,9 @@ export default function Home() {
           </motion.div>
         </div>
       </section>
+      <footer>
+        <Footer />
+      </footer>
     </div>
   );
 }
