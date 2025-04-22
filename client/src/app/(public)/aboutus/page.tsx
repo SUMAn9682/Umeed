@@ -37,7 +37,7 @@ const AboutUs: React.FC = () => {
               Pioneering the <span className="text-primary">Future</span> of Technology
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground mb-8">
-              We're a team of visionaries, creators, and innovators building tomorrow's solutions today.
+              We&apos;re a team of visionaries, creators, and innovators building tomorrow&apos;s solutions today.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <button className="bg-primary text-primary-foreground px-6 py-3 rounded-lg font-medium">
@@ -65,7 +65,7 @@ const AboutUs: React.FC = () => {
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold mb-4">Our Vision</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              At FutureTech, we're redefining what's possible through innovation, collaboration, and a commitment to excellence.
+              At FutureTech, we&apos;re redefining what&apos;s possible through innovation, collaboration, and a commitment to excellence.
             </p>
           </div>
           
@@ -84,7 +84,7 @@ const AboutUs: React.FC = () => {
               {
                 icon: <Globe className="w-10 h-10 text-chart-3" />,
                 title: "Global Impact",
-                description: "We're building solutions that improve lives across the planet."
+                description: "We&apos;re building solutions that improve lives across the planet."
               }
             ].map((item, index) => (
               <div 
