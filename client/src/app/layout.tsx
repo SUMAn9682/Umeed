@@ -4,7 +4,8 @@ import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import Navbar from "@/components/navbar/Navbar";
-import Footer from "@/components/footer/Footer";
+import { Suspense } from "react";
+import Loading from "./loading";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -40,8 +41,9 @@ export default function RootLayout({
             <header>
               <Navbar />
             </header>
-            <main className="pt-10">{children}</main>
-            <Footer/>
+            <Suspense fallback={<Loading />}>
+              <main className="pt-10">{children}</main>
+            </Suspense>
             <Toaster />
           </ThemeProvider>
       </body>

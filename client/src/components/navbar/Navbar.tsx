@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { ThemeToggler } from "../theme/ThemeToggler";
 import { useAuthStore } from "@/store/Auth";
 import { Button } from "../ui/button";
-import { LogOut, Menu, Home, Info, Mail, LogIn, UserPlus, Droplet, Heart } from "lucide-react";
+import { LogOut, Menu, Home, LogIn, UserPlus, Droplet, Heart } from "lucide-react";
 import { api } from "@/helpers/api";
 import { toast } from "sonner";
 import { useRouter, usePathname } from "next/navigation";
