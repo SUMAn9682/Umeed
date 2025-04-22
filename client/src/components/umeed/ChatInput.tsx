@@ -8,6 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { SendHorizontal, Paperclip, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
+import Image from "next/image";
 
 export const ChatInput = () => {
   const [message, setMessage] = useState("");
@@ -118,7 +119,7 @@ export const ChatInput = () => {
           <div className="flex items-center space-x-3">
             {previewImage && (
               <div className="w-16 h-16 relative rounded overflow-hidden bg-secondary">
-                <img 
+                <Image 
                   src={previewImage} 
                   alt="Document preview" 
                   className="object-cover w-full h-full"
