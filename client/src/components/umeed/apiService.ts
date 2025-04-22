@@ -37,5 +37,23 @@ export const chatApi = {
     clearAllSessions: async () => {
       const response = await api.delete('/chat/sessions');
       return response.data;
-    }
+    },
+
+    // Upload medical image
+    uploadMedicalImage: async (imageFile: File, sessionId?: string) => {
+      const formData = new FormData();
+      formData.append('medicalImage', imageFile);
+      
+      if (sessionId) {
+        formData.append('sessionId', sessionId);
+      }
+      
+      const response = await api.post('/chat/upload-image', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      
+      return response.data;
+    },
   };

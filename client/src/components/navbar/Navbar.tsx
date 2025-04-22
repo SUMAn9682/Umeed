@@ -29,6 +29,7 @@ function Navbar() {
     {
       name: "Home",
       href: "/",
+      icon: <Home className="h-4 w-4 mr-1" />,
       auth: false,
     },
     {
@@ -46,11 +47,13 @@ function Navbar() {
     {
       name: "About Us",
       href: "/about",
+      icon: <Info className="h-4 w-4 mr-1" />,
       auth: false,
     },
     {
       name: "Contact Us",
       href: "/contact",
+      icon: <Mail className="h-4 w-4 mr-1" />,
       auth: false,
     },
     {
