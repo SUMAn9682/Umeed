@@ -10,6 +10,7 @@ interface ChatStore {
   isLoading: boolean;
   error: string | null;
   
+  
   // Actions
   fetchSessions: () => Promise<void>;
   fetchSession: (sessionId: string) => Promise<void>;
@@ -18,6 +19,7 @@ interface ChatStore {
   deleteSession: (sessionId: string) => Promise<void>;
   updateSessionTitle: (sessionId: string, title: string) => Promise<void>;
   clearAllSessions: () => Promise<void>;
+  uploadImage: (imageFile: File) => Promise<void>;
 }
 
 export const useChatStore = create<ChatStore>((set, get) => ({
@@ -146,5 +148,70 @@ export const useChatStore = create<ChatStore>((set, get) => ({
       console.error('Error clearing sessions:', error);
       set({ error: 'Failed to clear sessions', isLoading: false });
     }
+  },
+
+  
+
+// Then add this implementation in the create function
+  uploadImage: async (imageFile: File) => {
+  const currentSession = get().currentSession;
+  set({ isLoading: true, error: null });
+  
+  try {
+    // Optimistically update UI to show uploading state
+    if (currentSession) {
+      set({
+        currentSession: {
+          ...currentSession,
+          messages: [
+            ...currentSession.messages,
+            { 
+              role: 'user', 
+              content: "I've uploaded a medical document. Can you analyze it and explain what it says in simple terms?",
+              attachment: { 
+                type: 'image',
+                url: URL.createObjectURL(imageFile),
+                uploading: true 
+              }
+            } as ChatMessage
+          ]
+        }
+      });
+    }
+    
+    // Upload the image
+    const response = await chatApi.uploadMedicalImage(imageFile, currentSession?._id);
+    
+    // Update with the response including the image
+    set({
+      currentSession: {
+        _id: response.sessionId,
+        title: currentSession?.title || response.sessionId,
+        messages: response.context,
+        updatedAt: new Date().toISOString(),
+        createdAt: currentSession?.createdAt || new Date().toISOString()
+      },
+      isLoading: false
+    });
+    
+    // Refresh the sessions list
+    get().fetchSessions();
+  } catch (error) {
+    console.error('Error uploading image:', error);
+    set({ 
+      error: 'Failed to upload image. Please try again or use a different file.',
+      isLoading: false 
+    });
+    
+    // Remove the optimistic update if it failed
+    if (currentSession) {
+      set({
+        currentSession: {
+          ...currentSession,
+          messages: currentSession.messages.filter(msg => !msg.attachment?.uploading)
+        }
+      });
+    }
   }
+},
 }));
