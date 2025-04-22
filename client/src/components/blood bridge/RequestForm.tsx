@@ -114,7 +114,7 @@ function RequestForm() {
           city: "",
         });
         setSelectedStateCode("");
-        router.push(`/bloodbridge/request/${response.data.data?.bloodRequest._id}`);
+        router.push(`/blood-bridge/request/${response.data.data?.bloodRequest._id}`);
       }
     } catch (error) {
       console.error("Error creating blood request:", error);
