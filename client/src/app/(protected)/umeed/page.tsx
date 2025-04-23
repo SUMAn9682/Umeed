@@ -8,7 +8,6 @@ import { useAuthStore } from "@/store/Auth";
 
 export default function Home() {
   const { fetchSessions } = useChatStore();
-  const userBG = useAuthStore((state) => state?.bloodGroup);
 
   useEffect(() => {
     fetchSessions();
@@ -16,7 +15,7 @@ export default function Home() {
 
   return (
     <main className="flex h-screen -mt-12">
-      <Sidebar bloodGroup={userBG ?? ""} />
+      <Sidebar />
 
       <div className="flex-1 md:ml-16 h-full transition-all duration-300">
         <ChatContainer />

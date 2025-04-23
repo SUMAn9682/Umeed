@@ -123,6 +123,8 @@ export const ChatInput = () => {
                   src={previewImage} 
                   alt="Document preview" 
                   className="object-cover w-full h-full"
+                  width={64}
+                  height={64}
                 />
               </div>
             )}

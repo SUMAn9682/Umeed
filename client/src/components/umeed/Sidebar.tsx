@@ -18,11 +18,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 
-interface SidebarProps {
-  bloodGroup?: string;
-}
-
-export const Sidebar = ({ bloodGroup }: SidebarProps) => {
+export const Sidebar = () => {
   const { sessions, fetchSessions, clearAllSessions } = useChatStore();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -36,13 +32,7 @@ export const Sidebar = ({ bloodGroup }: SidebarProps) => {
         <div className="flex items-center justify-between mb-4">
           <h2 className="font-semibold text-lg">Umeed</h2>
         </div>
-
-        {bloodGroup && (
-          <div className="mb-4 p-2 bg-sidebar-primary/10 rounded-md text-sm">
-            <p className="font-medium">Blood Group: {bloodGroup}</p>
-          </div>
-        )}
-
+        
         <NewChatButton />
 
         <div className="flex items-center justify-between mb-2">
