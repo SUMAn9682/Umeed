@@ -5,7 +5,7 @@ import { useChatStore } from "@/store/Chatbot";
 import { NewChatButton } from "./NewChatButton";
 import { SessionItem } from "./SessionItem";
 import { Button } from "@/components/ui/button";
-import { Trash2, CircleChevronRight, X, CircleChevronLeft } from "lucide-react";
+import { Trash2, CircleChevronRight,  CircleChevronLeft } from "lucide-react";
 import {
   AlertDialog,
   AlertDialogAction,
