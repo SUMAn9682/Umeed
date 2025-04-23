@@ -2,11 +2,14 @@ import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
+import { createServer } from "http";
+import { initializeWebSocket } from "./utils/webSocket.js";
 
 
 dotenv.config({path: "./.env"});
 
 const app = express();
+const server = createServer(app);
 
 
 console.log(process.env.CORS_ORIGIN);
@@ -27,11 +30,16 @@ app.use(cookieParser());
 import userRouter from "./routes/user.routes.js";
 import bloodRequestRouter from "./routes/bloodRequest.routes.js";
 import chatRouter from "./routes/chatbot.routes.js";
+import notificationRouter from "./routes/notification.routes.js";
 
 
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/blood-requests", bloodRequestRouter);
 app.use("/api/v1/chat", chatRouter);
+app.use("/api/v1/notifications", notificationRouter);
 
 
-export {app}
+// export {app}
+initializeWebSocket(server); // Integrate WebSocket
+
+export {server, app}
