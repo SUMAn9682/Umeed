@@ -11,6 +11,7 @@ import { toast } from "sonner";
 import { useRouter, usePathname } from "next/navigation";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "../ui/sheet";
 import { cn } from "@/lib/utils";
+import Notifications from "./Notifications";
 
 function Navbar() {
   const router = useRouter();
@@ -147,6 +148,10 @@ function Navbar() {
               Get Started
             </Button>
           </Link>
+        )}
+        
+        {isAuthenticated && (
+          <Notifications />
         )}
         
         <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>

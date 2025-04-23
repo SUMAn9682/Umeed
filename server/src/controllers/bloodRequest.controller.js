@@ -4,6 +4,8 @@ import { ApiResponse } from "../utils/apiResponse.js";
 import { asyncHandler } from "../utils/asynchandler.js";
 import { User } from "../models/user.model.js";
 import { sendBloodRequestEmail } from "../service/email.js";
+import { Notification } from "../models/notification.model.js";
+import { getIO } from "../utils/webSocket.js"
 
 
 
@@ -31,7 +33,11 @@ const createBloodRequest = asyncHandler(async (req, res) => {
             status,
             address,
         });
-
+        
+        // Get Socket.io instance
+        const io = getIO();
+        
+        // Extract location details
         const { city, district, state } = address;
         
         // Find matching users with hierarchical location search
@@ -57,31 +63,50 @@ const createBloodRequest = asyncHandler(async (req, res) => {
             });
         }
 
-        const userEmails = await Promise.all(users.map(async (user) => {
+        // Create one notification per user
+        const notifications = await Promise.all(users.map(async (user) => {
             try {
-               const emailSent = await sendBloodRequestEmail({
+                const notification = await Notification.create({
+                    userId: user._id,
+                    type: "blood_request",
+                    message: `A blood request for ${bloodGroup} is needed in ${city}.`,
+                    redirectUrl: `/blood-bridge/request/${savedBloodRequest._id}`,
+                    data: { bloodRequestId: savedBloodRequest._id },
+                });
+                
+                // Emit websocket event to the specific user
+                io.to(user._id.toString()).emit("bloodRequest", {
+                    type: notification.type,
+                    message: notification.message,
+                    redirectUrl: notification.redirectUrl,
+                    data: notification.data,
+                    createdAt: notification.createdAt
+                });
+
+                await sendBloodRequestEmail({
                     to: user.email,
                     bloodGroup,
                     city,
-                    requestId: savedBloodRequest._id,
+                    requestId: savedBloodRequest._id
                 });
 
-                return emailSent;   
+                return notification;
             } catch (error) {
-                console.error("Error fetching user email:", error);
-                return null; // Skip this user if there's an error
-                
+                console.error(`Error creating notification for user ${user._id}:`, error.message);
+                return null;
             }
         }));
 
-
-        const successfulEmails = userEmails.filter(email => email !== null);
+        // Filter out failed notifications
+        const successfulNotifications = notifications.filter(notification => notification !== null);
         
+        // Add logging to help debug
+        console.log(`Created ${successfulNotifications.length} notifications for blood request ${savedBloodRequest._id}`);
         
         return res.status(201).json(
             new ApiResponse(201, "Blood request created successfully", {
                 bloodRequest: savedBloodRequest,
-                emailSent: successfulEmails.length > 0,
+                notificationsSent: successfulNotifications.length
             })
         );
     } catch (error) {
@@ -91,7 +116,6 @@ const createBloodRequest = asyncHandler(async (req, res) => {
         );
     }
 });
-
 // get all blood requests
 const getAllBloodRequests = asyncHandler(async (req, res) => {
     try {
