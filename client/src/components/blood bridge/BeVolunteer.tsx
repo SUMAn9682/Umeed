@@ -45,10 +45,10 @@ return (
         </AlertDialogDescription>
       </AlertDialogHeader>
       <AlertDialogFooter className="gap-2">
-        <AlertDialogAction onClick={() => handleSubmit(false)} >
+        <AlertDialogAction className="text-white/80" onClick={() => handleSubmit(false)} >
           Continue without sharing
         </AlertDialogAction>
-        <AlertDialogAction onClick={() => handleSubmit(true)}>
+        <AlertDialogAction className="text-white/80" onClick={() => handleSubmit(true)}>
           Share
         </AlertDialogAction>
       </AlertDialogFooter>

@@ -240,10 +240,6 @@ const UserRequests = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-semibold text-center mb-8">
-        Your Blood Donation Requests
-      </h1>
-
       {error && (
         <Alert variant="destructive" className="mb-6">
           <AlertCircle className="h-4 w-4" />

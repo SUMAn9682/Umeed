@@ -3,7 +3,7 @@ import { Tabs, TabsList, TabsContent, TabsTrigger } from "@/components/ui/tabs";
 import UserRequests from "@/components/blood bridge/UserRequests";
 import Requests from "@/components/blood bridge/Requests";
 import Link from "next/link";
-import { Info, GitBranch, Heart } from "lucide-react";
+import { Info, GitBranch, Heart, DropletIcon } from "lucide-react";
 
 function BloodBridge() {
   return (
@@ -48,14 +48,14 @@ function BloodBridge() {
       </header>
 
       <main className="container mx-auto md:px-6 py-8 relative z-10">
-        <Tabs defaultValue="donor" className="w-full max-w-4xl mx-auto">
+        <Tabs defaultValue="donor" className="w-full max-w-5xl mx-auto">
           <div className="flex justify-center mb-6">
             <TabsList className="inline-flex space-x-2 p-1 bg-card/50 backdrop-blur-md rounded-xl shadow-md border border-border/30">
               <TabsTrigger
                 value="donor"
                 className="px-6 py-3 text-base font-medium rounded-lg data-[state=active]:bg-red-600 dark:data-[state=active]:bg-red-600 data-[state=active]:text-white transition-all duration-200"
               >
-                <Heart className="w-4 h-4 mr-2 inline-block" />
+                <DropletIcon className="w-4 h-4 mr-2 inline-block" />
                 Be a Donor
               </TabsTrigger>
               <TabsTrigger
@@ -73,15 +73,14 @@ function BloodBridge() {
               value="donor"
               className="p-6 animate-in fade-in-50 duration-300"
             >
-              <div className="grid md:grid-cols-2 gap-6">
-                {/* Left Side: Request Form */}
-                <div className="bg-background/50 backdrop-blur-sm rounded-xl p-5 border border-border/50 shadow-sm max-h-50">
+              <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+                {/* Left Side: Request Form (25% on large screens) */}
+                <div className="lg:col-span-1 bg-background/50 backdrop-blur-sm rounded-xl p-5 border border-border/50 shadow-sm h-fit">
                   <h2 className="text-xl font-semibold mb-4 text-foreground flex items-center">
                     <Heart className="mr-2 h-5 w-5 text-red-600" />
                     Create Donation Request
                   </h2>
                   <RequestForm />
-
                   <div className="mt-4">
                     <Link
                       href="/blood-bridge/guidelines"
@@ -93,13 +92,13 @@ function BloodBridge() {
                   </div>
                 </div>
 
-                {/* Right Side: Current Requests */}
-                <div className="bg-background/50 backdrop-blur-sm rounded-xl p-5 border border-border/50 shadow-sm">
+                {/* Right Side: Current Requests (75% on large screens) */}
+                <div className="lg:col-span-3 bg-background/50 backdrop-blur-sm rounded-xl p-5 border border-border/50 shadow-sm">
                   <h2 className="text-xl font-semibold mb-4 text-foreground flex items-center">
                     <GitBranch className="mr-2 h-5 w-5 text-red-600" />
                     Current Donation Needs
                   </h2>
-                  <div className="max-h-[500px] overflow-y-auto pr-2">
+                  <div className="max-h-[600px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-red-600/30 scrollbar-track-transparent">
                     <Requests />
                   </div>
                 </div>
@@ -115,7 +114,9 @@ function BloodBridge() {
                   <GitBranch className="mr-2 h-5 w-5 text-red-600" />
                   Your Blood Requests
                 </h2>
-                <UserRequests />
+                <div className="max-h-[600px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-red-600/30 scrollbar-track-transparent">
+                  <UserRequests />
+                </div>
               </div>
             </TabsContent>
           </div>

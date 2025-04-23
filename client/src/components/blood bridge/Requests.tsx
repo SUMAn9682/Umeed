@@ -1,6 +1,11 @@
 "use client";
 import { useEffect, useState } from "react";
-import { ArrowRight, ChevronLeft, ChevronRight, HandHelping, Loader2 } from "lucide-react";
+import {
+  ChevronLeft,
+  ChevronRight,
+  HandHelping,
+  Loader2,
+} from "lucide-react";
 import { useAuthStore } from "@/store/Auth";
 import { api } from "@/helpers/api";
 import {
@@ -10,13 +15,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "../ui/card";
+import { Card, CardContent, CardFooter } from "../ui/card";
 import { Button } from "../ui/button";
 import { Badge } from "../ui/badge";
 import BeVolunteer from "./BeVolunteer";
@@ -37,7 +36,7 @@ const statusOptions = ["all", "pending", "accepted", "rejected"];
 const sortOptions = ["newest", "oldest"];
 
 function Requests() {
-  const userBG = useAuthStore((state) => state.bloodGroup); 
+  const userBG = useAuthStore((state) => state.bloodGroup);
   const [requests, setRequests] = useState<Requests | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -105,62 +104,60 @@ function Requests() {
   };
 
   return (
-    <div className="container mx-auto px-1 md:px-4 py-8 ">
-      <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
-        <div className="flex flex-wrap gap-4">
-          <Select
-            value={filters.bloodGroup}
-            onValueChange={(value) => handleFilterChange("bloodGroup", value)}
-          >
-            <SelectTrigger className="w-[150px] bg-light-bg dark:bg-dark-bg text-light-text dark:text-dark-text border border-primary">
-              <SelectValue placeholder="Blood Group" />
-            </SelectTrigger>
-            <SelectContent className="bg-light-bg dark:bg-dark-bg text-light-text dark:text-dark-text">
-              <SelectItem value="all">All Groups</SelectItem>
-              {validBloodGroups.map((group) => (
-                <SelectItem key={group} value={group}>
-                  {group}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+    <div className="container px-1 py-4">
+      <div className="flex flex-wrap gap-2 mb-4">
+        <Select
+          value={filters.bloodGroup}
+          onValueChange={(value) => handleFilterChange("bloodGroup", value)}
+        >
+          <SelectTrigger className="w-[120px] bg-light-bg dark:bg-dark-bg text-light-text dark:text-dark-text border border-primary">
+            <SelectValue placeholder="Blood Group" />
+          </SelectTrigger>
+          <SelectContent className="bg-light-bg dark:bg-dark-bg text-light-text dark:text-dark-text">
+            <SelectItem value="all">All Groups</SelectItem>
+            {validBloodGroups.map((group) => (
+              <SelectItem key={group} value={group}>
+                {group}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
 
-          <Select
-            value={filters.status}
-            onValueChange={(value) => handleFilterChange("status", value)}
-          >
-            <SelectTrigger className="w-[150px] bg-light-bg dark:bg-dark-bg text-light-text dark:text-dark-text border border-secondary">
-              <SelectValue placeholder="Status" />
-            </SelectTrigger>
-            <SelectContent className="bg-light-bg dark:bg-dark-bg text-light-text dark:text-dark-text">
-              {statusOptions.map((status) => (
-                <SelectItem key={status} value={status}>
-                  {status.charAt(0).toUpperCase() + status.slice(1)}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+        <Select
+          value={filters.status}
+          onValueChange={(value) => handleFilterChange("status", value)}
+        >
+          <SelectTrigger className="w-[120px] bg-light-bg dark:bg-dark-bg text-light-text dark:text-dark-text border border-secondary">
+            <SelectValue placeholder="Status" />
+          </SelectTrigger>
+          <SelectContent className="bg-light-bg dark:bg-dark-bg text-light-text dark:text-dark-text">
+            {statusOptions.map((status) => (
+              <SelectItem key={status} value={status}>
+                {status.charAt(0).toUpperCase() + status.slice(1)}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
 
-          <Select
-            value={filters.sort}
-            onValueChange={(value) => handleFilterChange("sort", value)}
-          >
-            <SelectTrigger className="w-[150px] bg-light-bg dark:bg-dark-bg text-light-text dark:text-dark-text border border-accent">
-              <SelectValue placeholder="Sort By" />
-            </SelectTrigger>
-            <SelectContent className="bg-light-bg dark:bg-dark-bg text-light-text dark:text-dark-text">
-              {sortOptions.map((option) => (
-                <SelectItem key={option} value={option}>
-                  {option.charAt(0).toUpperCase() + option.slice(1)}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
+        <Select
+          value={filters.sort}
+          onValueChange={(value) => handleFilterChange("sort", value)}
+        >
+          <SelectTrigger className="w-[120px] bg-light-bg dark:bg-dark-bg text-light-text dark:text-dark-text border border-accent">
+            <SelectValue placeholder="Sort By" />
+          </SelectTrigger>
+          <SelectContent className="bg-light-bg dark:bg-dark-bg text-light-text dark:text-dark-text">
+            {sortOptions.map((option) => (
+              <SelectItem key={option} value={option}>
+                {option.charAt(0).toUpperCase() + option.slice(1)}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
       </div>
 
       {loading ? (
-        <div className="flex justify-center items-center min-h-[400px]">
+        <div className="flex justify-center items-center h-40">
           <Loader2 className="w-8 h-8 animate-spin text-primary" />
         </div>
       ) : error ? (
@@ -171,76 +168,70 @@ function Requests() {
         </Card>
       ) : (
         <>
-          <div className="grid gap-4 mb-6 ">
+          <div className="grid gap-3 mb-6">
             {requests?.bloodRequests.map((request) => (
               <Card
                 key={request._id}
-                className="hover:shadow-lg transition-shadow dark:bg-dark-bg"
+                className="hover:shadow transition-shadow dark:bg-dark-bg overflow-hidden"
               >
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-xl font-semibold flex gap-3 items-center">
-                    <Badge
-                      variant="outline"
-                      className="text-lg border-primary text-primary dark:border-dark-text dark:text-dark-text"
-                    >
-                      {request.bloodGroup}
-                    </Badge>
-                    <Badge className={getUrgencyColor(request.urgency)}>
-                      {request.urgency.toUpperCase()}
-                    </Badge>
-                  </CardTitle>
-                  <div className="flex gap-4">
-                  <p className="flex items-center text-green-400">
-                    <HandHelping className="w-6 h-6 mr-2" />
-                    <span>{request.volunteers?.length}</span>
-                  </p>
-                  <Badge
-                    variant="outline"
-                    className="border-secondary text-secondary dark:border-dark-text dark:text-dark-text"
+                <div className="flex flex-col sm:flex-row sm:items-center">
+                  <Link
+                    href={`/blood-bridge/request/${request._id}`}
+                    className="flex flex-col sm:flex-row sm:items-center flex-grow hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
                   >
-                    {request.status.charAt(0).toUpperCase() +
-                      request.status.slice(1)}
-                  </Badge>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <div>
-                      <h3 className="font-semibold mb-1">Message</h3>
-                      <p className="text-gray-600 dark:text-dark-text">
-                        {request.message}
-                      </p>
+                    {/* Left side - Blood type and urgency (INSIDE the link) */}
+                    <div className="flex items-center p-3 sm:w-1/6 sm:justify-center sm:border-r border-border">
+                      <div className="flex flex-row md:flex-col items-center gap-2">
+                        <Badge
+                          variant="outline"
+                          className="text-lg font-bold border-primary text-primary dark:border-dark-text dark:text-dark-text"
+                        >
+                          {request.bloodGroup}
+                        </Badge>
+                        <Badge className={getUrgencyColor(request.urgency)}>
+                          {request.urgency.toUpperCase()}
+                        </Badge>
+                      </div>
                     </div>
-                    <div>
-                      <h3 className="font-semibold mb-1">Location</h3>
-                      <p className="text-gray-600 dark:text-dark-text">
-                        {request.address.city}, {request.address.district},{" "}
-                        {request.address.state}
-                      </p>
-                    </div>
-                    <div>
-                      <h3 className="font-semibold mb-1">Contact</h3>
-                      <p className="text-gray-600 dark:text-dark-text">
-                        {request.contactDetails.phone}
-                      </p>
-                      <p className="text-gray-600 dark:text-dark-text">
-                        {request.contactDetails.email}
-                      </p>
-                    </div>
-                  </div>
-                </CardContent>
-                <CardFooter className="flex justify-between">
-                  <Link href={`/blood-bridge/request/${request._id}`}
-                  className="text-secondary flex items-center hover:underline font-semibold"
-                  >
-                    View details <ArrowRight className="w-4 h-4 ml-2" />
+
+                    {/* Middle content section */}
+                    <CardContent className="py-3 px-4 sm:flex-1">
+                      <div className="flex flex-col space-y-1">
+                        <p className="text-sm text-gray-600 dark:text-dark-text line-clamp-2">
+                          {request.message}
+                        </p>
+                        <p className="text-xs text-gray-500 dark:text-gray-400">
+                          {request.address.city}, {request.address.district}
+                        </p>
+                      </div>
+                    </CardContent>
                   </Link>
 
-                  {request.bloodGroup === userBG &&
-                    request.status === "pending" && (
-                      <BeVolunteer id={request._id} />
-                    )}
-                </CardFooter>
+                  {/* Right section with status and Be Volunteer button (OUTSIDE the link) */}
+                  <CardFooter className="px-3 py-2 sm:ml-auto sm:w-2/6 flex items-center justify-between sm:border-l border-border">
+                    <div className="flex items-center gap-3">
+                      <span className="flex items-center text-green-500 text-sm">
+                        <HandHelping className="w-4 h-4 mr-1" />
+                        {request.volunteers?.length}
+                      </span>
+                      <Badge
+                        variant="outline"
+                        className="text-xs"
+                      >
+                        {request.status.charAt(0).toUpperCase() +
+                          request.status.slice(1)}
+                      </Badge>
+                    </div>
+
+                    {/* Be Volunteer button */}
+                    <div className="flex items-center">
+                      {request.bloodGroup === userBG &&
+                        request.status === "pending" && (
+                          <BeVolunteer id={request._id} />
+                        )}
+                    </div>
+                  </CardFooter>
+                </div>
               </Card>
             ))}
           </div>
@@ -249,24 +240,26 @@ function Requests() {
             <div className="flex justify-center gap-2">
               <Button
                 variant="outline"
+                size="sm"
                 onClick={() => setCurrentPage((prev) => prev - 1)}
                 disabled={!requests.hasPrev}
                 className="border-secondary text-secondary dark:border-light-text dark:text-light-text"
               >
-                <ChevronLeft className="w-4 h-4 mr-2" />
-                Previous
+                <ChevronLeft className="w-4 h-4 mr-1" />
+                Prev
               </Button>
-              <span className="flex items-center px-4">
-                Page {requests.currentPage} of {requests.totalPages}
+              <span className="flex items-center px-3 text-sm">
+                {requests.currentPage}/{requests.totalPages}
               </span>
               <Button
                 variant="outline"
+                size="sm"
                 onClick={() => setCurrentPage((prev) => prev + 1)}
                 disabled={!requests.hasNext}
                 className="border-secondary text-secondary dark:border-light-text dark:text-light-text"
               >
                 Next
-                <ChevronRight className="w-4 h-4 ml-2" />
+                <ChevronRight className="w-4 h-4 ml-1" />
               </Button>
             </div>
           )}
