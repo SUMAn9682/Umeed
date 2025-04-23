@@ -11,8 +11,7 @@ import { api } from '@/helpers/api';
 function Notifications() {
     const { 
         notifications, 
-        unreadCount, 
-        addNotification, 
+        unreadCount,  
         setNotifications 
     } = useNotificationStore();
     

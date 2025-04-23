@@ -1,5 +1,5 @@
 // src/service/socketService.ts
-import { io, Socket } from "socket.io-client";
+import { io, Socket, Manager } from "socket.io-client";
 import { useNotificationStore } from "@/store/Notifcation";
 
 let socket: Socket | null = null;
@@ -110,13 +110,17 @@ export const initializeSocket = (userId: string): Socket => {
   socket.on("connect_error", (error) => {
     console.error("Socket connection error:", error);
     store.setSocketConnected(false);
-
-    let ioInstance = socket?.io as any;
+  
+    // Safely access the manager and its options
+    const manager = socket?.io as Manager;
     
-    // Fall back to polling if websocket fails
-    if (ioInstance?.opts?.transports?.includes('websocket')) {
-      console.log('Falling back to polling transport');
-      ioInstance.opts.transports = ['polling'];
+    if (manager && manager.opts) {
+      const currentTransports = manager.opts.transports as string[];
+      
+      if (Array.isArray(currentTransports) && currentTransports.includes('websocket')) {
+        console.log('Falling back to polling transport');
+        manager.opts.transports = ['polling'];
+      }
     }
   });
 

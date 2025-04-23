@@ -8,10 +8,9 @@ export interface Notification {
   type: 'blood_request' | 'other';
   message: string;
   redirectUrl: string;
-  data?: any;
-  isRead: boolean;
   createdAt: string;
   updatedAt: string;
+  isRead: boolean;
 }
 
 interface NotificationStore {
