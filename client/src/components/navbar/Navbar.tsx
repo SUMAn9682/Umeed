@@ -103,7 +103,7 @@ function Navbar() {
       "max-w-full overflow-x-hidden"
     )}>
       <div className="flex items-center">
-        <Link href="/" className="flex items-center">
+        <Link href="/" className="flex items-center pl-10">
           <span className="bg-gradient-to-r from-primary to-purple-500 bg-clip-text text-transparent font-bold text-xl mr-2">Umeed</span>
         </Link>
       </div>
