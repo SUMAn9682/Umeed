@@ -4,7 +4,6 @@ import { Sidebar } from "@/components/umeed/Sidebar";
 import { ChatContainer } from "@/components/umeed/ChatContainer";
 import { useChatStore } from "@/store/Chatbot";
 import { useEffect } from "react";
-import { useAuthStore } from "@/store/Auth";
 
 export default function Home() {
   const { fetchSessions } = useChatStore();
