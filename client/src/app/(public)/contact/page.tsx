@@ -59,13 +59,15 @@ function Contact() {
           variants={itemVariants}
         >
           
+         
           <h1 className="text-6xl font-bold bg-gradient-to-r from-primary via-purple-500 to-pink-500 bg-clip-text text-transparent animate-gradient">
-            Let's Connect
+            Let&apos;s Connect
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
             Join us in our mission to save lives through blood donation. 
             Every question matters, every concern counts.
           </p>
+
         </motion.div>
 
         {/* Contact Info Cards */}
