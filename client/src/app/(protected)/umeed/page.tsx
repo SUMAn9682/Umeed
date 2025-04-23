@@ -16,9 +16,7 @@ export default function Home() {
 
   return (
     <main className="flex h-screen -mt-12">
-      <div className="w-64 h-full">
-        <Sidebar bloodGroup={userBG ?? undefined} />
-      </div>
+      <Sidebar bloodGroup={userBG ?? ""} />
 
       <div className="flex-1 md:ml-16 h-full transition-all duration-300">
         <ChatContainer />

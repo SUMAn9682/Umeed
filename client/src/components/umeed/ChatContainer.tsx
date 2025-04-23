@@ -6,7 +6,9 @@ import { ChatInput } from "./ChatInput";
 
 export const ChatContainer = () => {
   return (
-    <div className="flex flex-col h-full">
+    // Button to toggle the sidebar
+    
+    <div className="flex flex-col h-[100vh] pt-20 bg-background text-foreground">
       <ChatMessages />
       <ChatInput />
     </div>
