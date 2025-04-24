@@ -28,6 +28,7 @@ interface RequestCardProps {
   onDelete: (id: string) => void;
 }
 
+
 const UrgencyBadge = ({ urgency }: { urgency: string }) => {
   const colors = {
     high: "bg-red-600 dark:bg-red-600 text-red-800",
@@ -99,23 +100,23 @@ const RequestCard: React.FC<RequestCardProps> = ({
       <CardContent>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="space-y-2">
-            <h3 className="font-semibold text-gray-700 dark:text-dark-text">
+            <h3 className="font-semibold text-gray-700 dark:text-gray-200">
               Message
             </h3>
-            <p className="text-gray-600 dark:text-dark-text/80">{message}</p>
+            <p className="text-gray-600 dark:dark:text-gray-100">{message}</p>
           </div>
 
-          <div className="space-y-2  text-gray-700 dark:text-dark-text">
+          <div className="space-y-2  text-gray-700 dark:text-gray-200">
             <h3 className="font-semibold">Contact Details</h3>
             <p>{contactDetails.email}</p>
             <p>{contactDetails.phone}</p>
           </div>
 
           <div className="space-y-2">
-            <h3 className="font-semibold text-gray-700 dark:text-dark-text">
+            <h3 className="font-semibold text-gray-700 dark:text-gray-200">
               Address
             </h3>
-            <p className="text-gray-600 dark:text-dark-text/80">
+            <p className="text-gray-600 dark:text-gray-100">
               {address.city}, {address.district}, {address.state}
             </p>
           </div>
@@ -123,8 +124,8 @@ const RequestCard: React.FC<RequestCardProps> = ({
       </CardContent>
       <CardFooter className="justify-between items-center">
         <Link
-          href={`/blood-bridge/request/${request._id}?t=${Date.now()}`}
-          className="text-secondary flex items-center hover:underline font-semibold"
+         href={`/blood-bridge/request/${request._id}`}
+          className="text-primary flex items-center hover:underline font-semibold"
         >
           View details <ArrowRight className="w-4 h-4 ml-2" />
         </Link>
