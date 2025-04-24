@@ -149,6 +149,7 @@ const getAllBloodRequests = asyncHandler(async (req, res) => {
 // get blood request by id
 const getBloodRequestById = asyncHandler(async (req, res) => {
     try {
+
         const bloodRequestId = req.params.id;
         const bloodRequest = await BloodRequest.findById(bloodRequestId)
             .populate({
