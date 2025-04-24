@@ -149,6 +149,11 @@ const getAllBloodRequests = asyncHandler(async (req, res) => {
 // get blood request by id
 const getBloodRequestById = asyncHandler(async (req, res) => {
     try {
+        // Add these headers to prevent caching
+        res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+        res.setHeader('Pragma', 'no-cache');
+        res.setHeader('Expires', '0');
+        
         const bloodRequestId = req.params.id;
         const bloodRequest = await BloodRequest.findById(bloodRequestId)
             .populate({
