@@ -133,7 +133,7 @@ function Navbar() {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5 }}
       className={cn(
-        "fixed top-0 z-50 w-full px-6 py-3 transition-all duration-300 flex items-center justify-between",
+        "fixed top-0 z-50 w-[99vw] md:w-full px-6 py-3 transition-all duration-300 flex items-center justify-between",
         scrolled 
           ? "bg-background/80 backdrop-blur-xl shadow-lg border-b border-primary/10" 
           : "bg-transparent backdrop-blur-md",
@@ -192,7 +192,7 @@ function Navbar() {
           <Link href="/register" className="hidden md:flex">
             <Button
               variant="default"
-              className="flex items-center gap-1 text-foreground bg-gradient-to-r from-primary/90 to-purple-500/90 hover:from-primary hover:to-purple-500 transition-all duration-300 shadow-md hover:shadow-lg hover:shadow-primary/20"
+              className="flex items-center gap-1 text-white/90 bg-gradient-to-r from-primary/90 to-purple-500/90 hover:from-primary hover:to-purple-500 transition-all duration-300 shadow-md hover:shadow-lg hover:shadow-primary/20"
             >
               <UserPlus className="h-4 w-4" />
               Get Started

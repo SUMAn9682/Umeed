@@ -31,9 +31,9 @@ interface RequestCardProps {
 
 const UrgencyBadge = ({ urgency }: { urgency: string }) => {
   const colors = {
-    high: "bg-red-600 dark:bg-red-600 text-red-800",
-    medium: "bg-orange-400 dark:bg-orange-400 text-orange-800",
-    low: "bg-yellow-400 dark:bg-yellow-400 text-yellow-800",
+    high: "bg-red-600 text-white",
+    medium: "bg-orange-400 text-white",
+    low: "bg-yellow-400 text-white",
   };
 
   return (
@@ -56,7 +56,7 @@ const RequestCard: React.FC<RequestCardProps> = ({
     <Card className="w-full mb-4">
       <CardHeader>
         <div className="flex justify-between items-center">
-          <CardTitle className="text-xl">Blood Group: {bloodGroup}</CardTitle>
+          <CardTitle className="text-xl">Blood Group: <span className="text-red-600">{bloodGroup}</span></CardTitle>
           <div className="flex gap-2">
             <Badge
               variant="outline"
@@ -103,20 +103,20 @@ const RequestCard: React.FC<RequestCardProps> = ({
             <h3 className="font-semibold text-gray-700 dark:text-gray-200">
               Message
             </h3>
-            <p className="text-gray-600 dark:dark:text-gray-100">{message}</p>
+            <p className="text-muted-foreground">{message}</p>
           </div>
 
-          <div className="space-y-2  text-gray-700 dark:text-gray-200">
+          <div className="space-y-2">
             <h3 className="font-semibold">Contact Details</h3>
-            <p>{contactDetails.email}</p>
-            <p>{contactDetails.phone}</p>
+            <p className="text-muted-foreground">{contactDetails.email}</p>
+            <p className="text-muted-foreground">{contactDetails.phone}</p>
           </div>
 
           <div className="space-y-2">
             <h3 className="font-semibold text-gray-700 dark:text-gray-200">
               Address
             </h3>
-            <p className="text-gray-600 dark:text-gray-100">
+            <p className="text-muted-foreground">
               {address.city}, {address.district}, {address.state}
             </p>
           </div>

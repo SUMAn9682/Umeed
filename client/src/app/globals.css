@@ -42,6 +42,9 @@
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
   --animate-gradient: gradient 8s linear infinite;
+
+  --font-family-poppins: var(--font-poppins);
+
   @keyframes gradient {
   to {
     backgroundPosition: var(--bg-size, 300%) 0;
@@ -130,5 +133,6 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-poppins);
   }
 }

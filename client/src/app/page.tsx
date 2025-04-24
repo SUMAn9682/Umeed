@@ -13,45 +13,24 @@ import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { NumberTicker } from "@/components/magicui/number-ticker";
 import Footer from "@/components/footer/Footer";
+import Image from "next/image";
 
 export default function Home() {
   const router = useRouter();
   return (
     <div className="min-h-screen bg-background text-foreground">
       <section className="relative overflow-hidden pt-20 pb-16 md:pt-36 md:pb-28">
-        <motion.div
-          className="absolute top-0 left-0 w-full h-full opacity-5"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.05 }}
-          transition={{ duration: 1.5 }}
-        >
-          <motion.div
-            className="absolute top-0 right-0 w-96 h-96 bg-primary rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2"
-            animate={{
-              scale: [1, 1.2, 1],
-              opacity: [0.7, 1, 0.7],
-            }}
-            transition={{
-              duration: 8,
-              repeat: Infinity,
-              repeatType: "reverse",
-            }}
-          ></motion.div>
-          <motion.div
-            className="absolute bottom-0 left-0 w-96 h-96 bg-chart-1 rounded-full blur-3xl transform -translate-x-1/2 translate-y-1/2"
-            animate={{
-              scale: [1, 1.3, 1],
-              opacity: [0.7, 1, 0.7],
-            }}
-            transition={{
-              duration: 10,
-              repeat: Infinity,
-              repeatType: "reverse",
-              delay: 1,
-            }}
-          ></motion.div>
-        </motion.div>
+        <div className="absolute inset-0 flex items-center justify-center z-0 opacity-10">
+          <Image
+            src={"/favicon.ico"}
+            alt="Umeed"
+            width={600}
+            height={600}
+            className="w-[600px] h-[600px] object-contain"
+          />
+        </div>
 
+        {/* Primary content container */}
         <div className="container mx-auto px-4 relative z-10">
           <motion.div
             className="flex flex-col items-center max-w-4xl mx-auto text-center"
@@ -59,18 +38,21 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <div className="px-4 py-2 bg-primary/10 text-primary rounded-full mb-4 items-center flex justify-center gap-1.5">
+
+            <div className="px-4 py-2 bg-primary/10 text-primary rounded-full mb-4 items-center flex justify-center gap-1.5 backdrop-blur-sm">
               <span className="font-medium">✨ Introducing Umeed</span>
               <ArrowRight size={16} />
             </div>
+
             <motion.h1
-              className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-primary to-chart-4 bg-clip-text text-transparent"
+              className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-primary to-chart-4 bg-clip-text text-transparent relative"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
               Welcome to Umeed
             </motion.h1>
+
             <motion.p
               className="mt-6 text-xl text-muted-foreground max-w-2xl"
               initial={{ opacity: 0, y: 20 }}
@@ -80,6 +62,7 @@ export default function Home() {
               Revolutionizing healthcare with AI assistance and connecting blood
               donors with those in need.
             </motion.p>
+
             <motion.div
               className="flex flex-col md:flex-row gap-4 mt-10"
               initial={{ opacity: 0, y: 20 }}
@@ -87,15 +70,19 @@ export default function Home() {
               transition={{ duration: 0.8, delay: 0.6 }}
             >
               <motion.button
-                className="px-6 py-3 bg-primary text-white/80 rounded-lg font-medium flex items-center justify-center gap-2 hover:opacity-90 transition-all hover:cursor-pointer"
-                whileHover={{ scale: 1.05 }}
+                className="px-6 py-3 bg-primary text-white/80 rounded-lg font-medium flex items-center justify-center gap-2 hover:opacity-90 transition-all hover:cursor-pointer shadow-lg shadow-primary/20"
+                whileHover={{
+                  scale: 1.05,
+                  boxShadow: "0 10px 25px -5px rgba(var(--primary), 0.3)",
+                }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => router.push("/register")}
               >
                 Get Started <ArrowRight size={18} />
               </motion.button>
               <motion.button
-                className="px-6 py-3 bg-secondary text-secondary-foreground rounded-lg font-medium flex items-center justify-center gap-2 hover:bg-muted transition-all"
+                onClick={() => router.push("/about")}
+                className="px-6 py-3 bg-secondary text-secondary-foreground rounded-lg font-medium flex items-center justify-center gap-2 hover:bg-muted transition-all hover:cursor-pointer"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -103,48 +90,6 @@ export default function Home() {
               </motion.button>
             </motion.div>
           </motion.div>
-
-          {/* Animated floating elements for visual interest */}
-          <div className="absolute inset-0 pointer-events-none">
-            <motion.div
-              className="absolute top-1/4 left-1/4 w-8 h-8 rounded-full bg-primary/20"
-              animate={{
-                y: [0, -15, 0],
-                opacity: [0.6, 1, 0.6],
-              }}
-              transition={{
-                duration: 3,
-                repeat: Infinity,
-                repeatType: "reverse",
-              }}
-            ></motion.div>
-            <motion.div
-              className="absolute top-1/3 right-1/4 w-12 h-12 rounded-full bg-chart-5/20"
-              animate={{
-                y: [0, -20, 0],
-                opacity: [0.6, 1, 0.6],
-              }}
-              transition={{
-                duration: 4,
-                repeat: Infinity,
-                repeatType: "reverse",
-                delay: 1,
-              }}
-            ></motion.div>
-            <motion.div
-              className="absolute bottom-1/3 right-1/3 w-6 h-6 rounded-full bg-chart-1/20"
-              animate={{
-                y: [0, -10, 0],
-                opacity: [0.6, 1, 0.6],
-              }}
-              transition={{
-                duration: 2.5,
-                repeat: Infinity,
-                repeatType: "reverse",
-                delay: 0.5,
-              }}
-            ></motion.div>
-          </div>
         </div>
       </section>
 
@@ -573,7 +518,7 @@ export default function Home() {
                 viewport={{ once: true, margin: "-100px" }}
               >
                 <motion.button
-                  className="px-6 py-3 bg-chart-5 text-foreground/90 rounded-lg font-medium flex items-center justify-center gap-2"
+                  className="px-6 py-3 bg-red-600 dark:bg-red-700 text-white/90 rounded-lg font-medium flex items-center justify-center gap-2"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => router.push("/signin")}
@@ -678,6 +623,32 @@ export default function Home() {
           </motion.div>
         </div>
       </section>
+
+      <section className="py-16 flex flex-col items-center">
+          <motion.div
+            className="text-center mb-12"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true, margin: "-100px" }}
+          >
+            <h2 className="text-3xl font-bold">Join the Umeed Community</h2>
+            <p className="mt-4 text-muted-foreground">
+              Connect with our community of donors and recipients
+            </p>
+          </motion.div>
+          <motion.button
+            className="bg-primary text-white/90 hover:bg-primary-foreground hover:text-primary px-6 py-3 rounded-2xl transition duration-300"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true, margin: "-100px" }}
+            onClick={() => router.push("/register")}
+          >
+            Join Now
+          </motion.button>
+          </section>
+
       <Footer />
     </div>
   );

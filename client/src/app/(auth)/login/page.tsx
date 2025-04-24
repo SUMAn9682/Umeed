@@ -154,7 +154,7 @@ const Page = () => {
             <Button
               type="submit"
               disabled={loading}
-              className="w-full h-12 bg-primary hover:bg-primary/90 text-primary-foreground relative overflow-hidden group"
+              className="w-full h-12 bg-primary hover:bg-primary/90 text-white/80 relative overflow-hidden group"
             >
               {loading ? (
                 <Loader2 className="animate-spin" />

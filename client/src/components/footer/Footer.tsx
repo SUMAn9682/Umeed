@@ -2,11 +2,11 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="relative bg-sidebar text-sidebar-foreground py-12 px-4 shadow-lg border-t border-sidebar-border overflow-hidden animate__animated animate__fadeInUp animate__faster">
+    <footer className="relative bg-sidebar text-sidebar-foreground py-6 px-4 shadow-lg border-t border-sidebar-border overflow-hidden animate__animated animate__fadeInUp animate__faster">
       {/* Glowing background overlay */}
       <div className="absolute inset-0 opacity-10 pointer-events-none bg-gradient-to-tr from-primary/60 via-accent/40 to-secondary/50 blur-2xl" />
 
-      <div className="relative z-10 container mx-auto text-center space-y-8">
+      <div className="relative z-10 container mx-auto text-center space-y-5">
         {/* Description */}
         <p className="text-sm text-muted-foreground max-w-2xl mx-auto leading-relaxed">
           &copy; {new Date().getFullYear()} Umeed. Revolutionizing healthcare with AI-driven solutions, making life-saving connections between blood donors and those in need.
