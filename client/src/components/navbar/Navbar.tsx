@@ -110,6 +110,7 @@ function Navbar() {
         toast.success("Logout successful");
         router.replace("/");
         logout();
+        router.refresh();
         setIsSheetOpen(false); // Close sheet on logout
       }
     } catch {
@@ -132,7 +133,7 @@ function Navbar() {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5 }}
       className={cn(
-        "fixed top-0 z-50 w-full px-6 py-4 transition-all duration-300 flex items-center justify-between",
+        "fixed top-0 z-50 w-full px-6 py-3 transition-all duration-300 flex items-center justify-between",
         scrolled 
           ? "bg-background/80 backdrop-blur-xl shadow-lg border-b border-primary/10" 
           : "bg-transparent backdrop-blur-md",

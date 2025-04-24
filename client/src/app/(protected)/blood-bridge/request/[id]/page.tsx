@@ -88,7 +88,7 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
                 <Card className="hover:shadow-xl transition-all duration-300 dark:bg-dark-bg">
                     <CardHeader className="space-y-4">
                         <div className="flex flex-wrap items-center justify-between gap-4">
-                            <Badge className="px-4 py-2 text-lg bg-primary text-white dark:bg-primary dark:text-white">
+                            <Badge className="px-4 py-2 text-lg bg-primary text-white">
                                 {request.bloodGroup}
                             </Badge>
                             <Badge className={`px-4 py-2 border ${getStatusColor(request.status)}`}>
@@ -99,7 +99,7 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
                             <Badge className={`${getUrgencyColor(request.urgency)} px-3 py-1`}>
                                 {request.urgency.toUpperCase()} URGENCY
                             </Badge>
-                            <Badge className="bg-secondary/20 text-secondary border-secondary dark:border-secondary dark:text-secondary dark:bg-secondary/20 px-3 py-1">
+                            <Badge className="bg-secondary/20 text-foreground px-3 py-1">
                                 <Users className="w-4 h-4 mr-1 inline" />
                                 {request.volunteers.length} volunteer{request.volunteers.length !== 1 ? "s" : ""}
                             </Badge>
@@ -111,30 +111,30 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
                     </CardHeader>
 
                     <CardContent className="space-y-6">
-                        <div className="bg-light-bg dark:bg-dark-bg/50 p-4 rounded-lg">
+                        <div className="p-4 rounded-lg">
                             <h3 className="font-semibold text-lg mb-2 text-primary">Message</h3>
-                            <p className="text-light-text dark:text-dark-text leading-relaxed">{request.message}</p>
+                            <p className="text-foreground leading-relaxed">{request.message}</p>
                         </div>
 
                         <div className="grid md:grid-cols-2 gap-6">
-                            <div className="bg-light-bg dark:bg-dark-bg/50 p-4 rounded-lg">
+                            <div className="p-4 rounded-lg">
                                 <h3 className="font-semibold text-lg mb-3 text-primary flex items-center">
                                     <MapPin className="w-5 h-5 mr-2" />
                                     Location
                                 </h3>
-                                <p className="text-light-text dark:text-dark-text">
+                                <p>
                                     {request.address.city}, {request.address.district}, {request.address.state}
                                 </p>
                             </div>
 
-                            <div className="bg-light-bg dark:bg-dark-bg/50 p-4 rounded-lg">
+                            <div className="p-4 rounded-lg">
                                 <h3 className="font-semibold text-lg mb-3 text-primary">Contact Details</h3>
                                 <div className="space-y-2">
-                                    <p className="flex items-center text-light-text dark:text-dark-text">
+                                    <p className="flex items-center">
                                         <Phone className="w-4 h-4 mr-2" />
                                         {request.contactDetails.phone}
                                     </p>
-                                    <p className="flex items-center text-light-text dark:text-dark-text">
+                                    <p className="flex items-center">
                                         <Mail className="w-4 h-4 mr-2" />
                                         {request.contactDetails.email}
                                     </p>
@@ -149,24 +149,24 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
                     {userId === request.userId && (
                         <CardFooter className="block p-6 text-center">
                             <h3 className="font-semibold text-xl text-primary mb-4">Volunteers</h3>
-                            <div className="bg-light-bg dark:bg-dark-bg/50 rounded-lg overflow-hidden">
+                            <div className="rounded-lg overflow-hidden">
                                 <div className="grid grid-cols-2 bg-secondary/10 p-4">
-                                    <p className="font-semibold text-light-text dark:text-dark-text">Name</p>
-                                    <p className="font-semibold text-light-text dark:text-dark-text">Contact</p>
+                                    <p className="font-semibold">Name</p>
+                                    <p className="font-semibold">Contact</p>
                                 </div>
                                 {request.volunteers.length === 0 ? (
-                                    <p className="text-gray-600 dark:text-dark-text p-4 text-center">No volunteers yet.</p>
+                                    <p className="text-gray-600 p-4 text-center">No volunteers yet.</p>
                                 ) : (
                                     request.volunteers.map((volunteer) => (
                                         <div key={volunteer.user._id} className="grid grid-cols-2 p-4 border-t border-gray-200 dark:border-gray-700">
-                                            <p className="text-light-text dark:text-dark-text">{volunteer.user.name}</p>
+                                            <p>{volunteer.user.name}</p>
                                             {volunteer.canShareDetails ? (
                                                 <div className="space-y-1">
-                                                    <p className="text-light-text dark:text-dark-text flex items-center">
+                                                    <p>
                                                         <Phone className="w-4 h-4 mr-2" />
                                                         {volunteer.user.phone || "-"}
                                                     </p>
-                                                    <p className="text-light-text dark:text-dark-text flex items-center">
+                                                    <p>
                                                         <Mail className="w-4 h-4 mr-2" />
                                                         {volunteer.user.email || "-"}
                                                     </p>
@@ -183,7 +183,7 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
                 </Card>
             ) : (
                 <div className="text-center p-8">
-                    <p className="text-gray-600 dark:text-dark-text text-lg">No request found.</p>
+                    <p className="text-gray-600 dark:text-gray-400 text-lg">No request found.</p>
                 </div>
             )}
         </div>
