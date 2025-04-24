@@ -5,7 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { Mail, Phone, MapPin, Send, Loader2, Heart } from "lucide-react";
+import { Mail, Phone, MapPin, Send, Loader2, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
 
 function Contact() {
@@ -18,20 +18,26 @@ function Contact() {
   });
 
   const containerVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      y: 0,
       transition: {
-        duration: 0.6,
-        staggerChildren: 0.1
+        duration: 0.8,
+        staggerChildren: 0.15
       }
     }
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 }
+    hidden: { opacity: 0, y: 30 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: {
+        type: "spring",
+        stiffness: 100
+      }
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -42,138 +48,153 @@ function Contact() {
     setIsLoading(false);
   };
 
+  const contactInfo = [
+    {
+      icon: <Phone className="w-6 h-6" />,
+      title: "Call Us Anytime",
+      details: ["+91 1234567890", "Available 24/7 for emergencies"],
+    },
+    {
+      icon: <Mail className="w-6 h-6" />,
+      title: "Email Support",
+      details: ["support@umeed.org", "Response within 24 hours"],
+    },
+    {
+      icon: <MapPin className="w-6 h-6" />,
+      title: "Visit Our Center",
+      details: ["123 Health Street", "New Delhi, India"],
+    },
+  ];
+
   return (
     <motion.div 
-      className="min-h-screen bg-gradient-to-b from-background via-background/95 to-background/90 pt-16 pb-24 px-4"
+      className="min-h-screen bg-gradient-to-br from-background via-background/95 to-background/90 pt-16 pb-24 px-4"
       initial="hidden"
       animate="visible"
       variants={containerVariants}
     >
-      
-        
-        
       <div className="max-w-6xl mx-auto">
         {/* Header Section */}
         <motion.div 
-          className="text-center mb-20 space-y-6 relative"
+          className="text-center mb-12 space-y-6 relative"
           variants={itemVariants}
         >
-          
-         
-          <h1 className="text-6xl font-bold bg-gradient-to-r from-primary via-purple-500 to-pink-500 bg-clip-text text-transparent animate-gradient">
-            Let&apos;s Connect
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-64 bg-primary/5 rounded-full blur-3xl -z-10"></div>
+          <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-primary via-purple-500 to-pink-500 bg-clip-text text-transparent animate-gradient">
+            Get In Touch
           </h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
             Join us in our mission to save lives through blood donation. 
             Every question matters, every concern counts.
           </p>
-
         </motion.div>
 
-        {/* Contact Info Cards */}
-        <motion.div 
-          className="grid md:grid-cols-3 gap-8 mb-20"
-          variants={containerVariants}
-        >
-          {[
-            {
-              icon: <Phone className="w-6 h-6 " />,
-              title: "Call Us Anytime",
-              details: ["+91 1234567890", "Available 24/7 for emergencies"],
-              
-              
-            },
-            {
-              icon: <Mail className="w-6 h-6" />,
-              title: "Email Support",
-              details: ["support@umeed.org", "Response within 24 hours"],
-            },
-            {
-              icon: <MapPin className="w-6 h-6" />,
-              title: "Visit Our Center",
-              details: ["123 Health Street", "New Delhi, India"],
-            },
-          ].map((item, index) => (
-            <motion.div key={index} variants={itemVariants}>
-              <Card className="group hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 border-primary/10 overflow-hidden">
-                <CardContent className="p-8 text-center space-y-4">
-                  <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto group-hover:scale-110 transition-transform duration-300">
-                    <div className="text-primary group-hover:rotate-12 transition-transform">
-                      {item.icon}
-                    </div>
-                  </div>
-                  <h3 className="font-semibold text-xl">{item.title}</h3>
-                  {item.details.map((detail, idx) => (
-                    <p key={idx} className="text-muted-foreground">{detail}</p>
+        {/* Two-row layout for medium screens */}
+        <div className="grid md:grid-cols-2 gap-8">
+          {/* First Row: Contact Info Card */}
+          <motion.div variants={itemVariants}>
+            <Card className="h-full shadow-xl backdrop-blur-sm bg-card/80 border border-white/10 overflow-hidden hover:shadow-2xl transition-all duration-500">
+              <CardContent className="p-8">
+                <h2 className="text-2xl font-semibold mb-8 bg-gradient-to-r from-primary to-purple-500 bg-clip-text text-transparent">Connect With Us</h2>
+                
+                <div className="space-y-8">
+                  {contactInfo.map((item, index) => (
+                    <motion.div 
+                      key={index} 
+                      className="flex items-start space-x-4 group"
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.2 }}
+                    >
+                      <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-all duration-300">
+                        <div className="text-primary">{item.icon}</div>
+                      </div>
+                      <div className="space-y-1">
+                        <h3 className="font-medium text-lg">{item.title}</h3>
+                        {item.details.map((detail, idx) => (
+                          <p key={idx} className="text-muted-foreground">{detail}</p>
+                        ))}
+                      </div>
+                      <ChevronRight className="w-5 h-5 text-primary/40 opacity-0 group-hover:opacity-100 transform -translate-x-2 group-hover:translate-x-0 transition-all duration-300" />
+                    </motion.div>
                   ))}
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
-        </motion.div>
+                </div>
 
-        {/* Contact Form */}
-        <motion.div variants={itemVariants}>
-          <Card className="border-primary/10 shadow-2xl hover:shadow-3xl transition-all duration-500 overflow-hidden backdrop-blur-sm bg-card/80">
-            <CardContent className="p-10">
-              <div className="max-w-2xl mx-auto">
-                <form onSubmit={handleSubmit} className="space-y-8">
-                  <div className="grid md:grid-cols-2 gap-8">
-                    <div className="space-y-3">
-                      <label className="text-sm font-medium">Full Name</label>
-                      <Input
-                        placeholder="John Doe"
-                        value={formData.name}
-                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        required
-                        className="h-12 border-primary/20 focus:border-primary transition-all duration-300"
-                      />
-                    </div>
-                    <div className="space-y-3">
-                      <label className="text-sm font-medium">Email Address</label>
-                      <Input
-                        type="email"
-                        placeholder="john@example.com"
-                        value={formData.email}
-                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        required
-                        className="h-12 border-primary/20 focus:border-primary transition-all duration-300"
-                      />
-                    </div>
+                <div className="mt-12 relative">
+                  <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-purple-500/20 blur-xl rounded-full -z-10"></div>
+                  <Card className="border-white/20 bg-background/50 backdrop-blur-md overflow-hidden">
+                    <CardContent className="p-4 text-center">
+                      <p className="text-sm text-muted-foreground">
+                        Need immediate assistance? 
+                        <span className="font-semibold text-primary ml-1">We're available 24/7</span>
+                      </p>
+                    </CardContent>
+                  </Card>
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+
+          {/* Second Row: Contact Form */}
+          <motion.div variants={itemVariants}>
+            <Card className="h-full shadow-xl backdrop-blur-sm bg-card/80 border border-white/10 overflow-hidden hover:shadow-2xl transition-all duration-500">
+              <CardContent className="p-8">
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium ml-1">Full Name</label>
+                    <Input
+                      placeholder="John Doe"
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      required
+                      className="h-12 rounded-xl border-primary/20 focus:border-primary transition-all duration-300 bg-background/50"
+                    />
                   </div>
                   
-                  <div className="space-y-3">
-                    <label className="text-sm font-medium">Subject</label>
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium ml-1">Email Address</label>
+                    <Input
+                      type="email"
+                      placeholder="john@example.com"
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      required
+                      className="h-12 rounded-xl border-primary/20 focus:border-primary transition-all duration-300 bg-background/50"
+                    />
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium ml-1">Subject</label>
                     <Input
                       placeholder="How can we help you today?"
                       value={formData.subject}
                       onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                       required
-                      className="h-12 border-primary/20 focus:border-primary transition-all duration-300"
+                      className="h-12 rounded-xl border-primary/20 focus:border-primary transition-all duration-300 bg-background/50"
                     />
                   </div>
 
-                  <div className="space-y-3">
-                    <label className="text-sm font-medium">Your Message</label>
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium ml-1">Your Message</label>
                     <Textarea
                       placeholder="Please share your thoughts..."
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                       required
-                      rows={6}
-                      className="border-primary/20 focus:border-primary transition-all duration-300 resize-none"
+                      rows={5}
+                      className="rounded-xl border-primary/20 focus:border-primary transition-all duration-300 resize-none bg-background/50"
                     />
                   </div>
 
                   <Button 
                     type="submit" 
-                    className="w-full h-14 text-lg font-medium hover:scale-[1.02] transition-all duration-300 bg-gradient-to-r from-primary to-primary/80"
+                    className="w-full h-12 text-lg font-medium hover:scale-[1.02] transition-all duration-300 bg-gradient-to-r from-primary to-purple-500 rounded-xl mt-4 text-foreground"
                     disabled={isLoading}
                   >
                     {isLoading ? (
                       <>
                         <Loader2 className="w-5 h-5 mr-2 animate-spin" />
-                        Sending your message...
+                        Processing...
                       </>
                     ) : (
                       <>
@@ -182,21 +203,17 @@ function Contact() {
                       </>
                     )}
                   </Button>
-                </form>
-              </div>
-            </CardContent>
-          </Card>
-        </motion.div>
 
-        {/* Footer Note */}
-        <motion.div 
-          className="text-center mt-12 text-muted-foreground flex items-center justify-center gap-2"
-          variants={itemVariants}
-        >
-          <span>Made with</span>
-          <Heart className="w-4 h-4 text-red-500 animate-pulse" />
-          <span>by Umeed Team</span>
-        </motion.div>
+                  <div className="text-center mt-4">
+                    <p className="text-xs text-muted-foreground">
+                      By submitting this form, you agree to our <span className="text-primary cursor-pointer">Privacy Policy</span>
+                    </p>
+                  </div>
+                </form>
+              </CardContent>
+            </Card>
+          </motion.div>
+        </div>
       </div>
     </motion.div>
   );
