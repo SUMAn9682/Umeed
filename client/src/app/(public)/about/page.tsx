@@ -16,10 +16,7 @@ const AboutUs: React.FC = () => {
       <div className="container mx-auto px-4">
         {/* Hero Section */}
         <div className="text-center mb-16">
-          <div className="inline-block p-3 bg-primary/10 rounded-full mb-4">
-            <Heart className="w-8 h-8 text-primary" />
-          </div>
-          <h1 className="text-4xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-bg-emerald-500 to-emerald-600 bg-clip-text text-transparent">
+          <h1 className="text-4xl md:text-6xl font-bold mb-4 text-primary shadow-lg">
             About Umeed
           </h1>
           <p className="text-xl max-w-2xl mx-auto text-muted-foreground">
@@ -85,7 +82,7 @@ const AboutUs: React.FC = () => {
               <div>
                 <h2 className="text-2xl font-semibold mb-2">Our Story</h2>
                 <p className="text-card-foreground">
-                  BloodBridge was created as a passion project by a team of
+                  Umeed was created as a passion project by a team of
                   developers who believe technology can make a meaningful
                   difference in healthcare accessibility. While we&apos;re starting
                   small, we have big dreams for how this platform can grow to
@@ -99,7 +96,7 @@ const AboutUs: React.FC = () => {
           <div className="mt-12 text-center">
             <Link
               href="/register"
-              className="bg-primary text-primary-foreground px-8 py-4 rounded-full font-medium hover:bg-primary/90 transition-colors inline-flex items-center gap-2 shadow-lg"
+              className="bg-primary text-white/80 px-8 py-4 rounded-full font-medium hover:bg-primary/90 transition-colors inline-flex items-center gap-2 shadow-lg"
             >
               Register as a Donor <ArrowRight className="w-5 h-5" />
             </Link>
@@ -113,7 +110,7 @@ const AboutUs: React.FC = () => {
         <div className="max-w-3xl mx-auto mt-16 text-center">
           <blockquote className="text-xl italic text-muted-foreground">
             &quot;In a world where every second counts during medical emergencies,
-            BloodBridge stands as a beacon of hope, connecting those who can
+            Umeed stands as a beacon of hope, connecting those who can
             give with those who desperately need.&quot;
           </blockquote>
         </div>

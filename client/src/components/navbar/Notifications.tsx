@@ -40,7 +40,7 @@ function Notifications() {
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
                 <button className="relative dark:text-dark-text">
-                    <Bell size={20} />
+                    <Bell size={17} />
                     {unreadCount > 0 && (
                         <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-600 text-sm text-white rounded-full flex items-center justify-center">
                             {unreadCount}

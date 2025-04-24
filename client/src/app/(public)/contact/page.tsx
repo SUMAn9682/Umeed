@@ -126,7 +126,7 @@ function Contact() {
                     <CardContent className="p-4 text-center">
                       <p className="text-sm text-muted-foreground">
                         Need immediate assistance? 
-                        <span className="font-semibold text-primary ml-1">We're available 24/7</span>
+                        <span className="font-semibold text-primary ml-1">We&apos;re available 24/7</span>
                       </p>
                     </CardContent>
                   </Card>

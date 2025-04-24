@@ -8,6 +8,7 @@ import { Bot, User } from "lucide-react";
 import { ChatMessage as ChatMessageType } from "@/types/chatbot";
 import { cn } from "@/lib/utils";
 import ReactMarkdown from "react-markdown";
+import Image from "next/image";
 
 interface ChatMessageProps {
   message: ChatMessageType;
@@ -35,10 +36,12 @@ const ChatMessage = ({ message }: ChatMessageProps) => {
         {/* Display image if present */}
         {message.attachment?.url && (
                 <div className="mb-2">
-                  <img 
+                  <Image 
                     src={message.attachment.url} 
                     alt="Medical document" 
                     className="rounded max-h-48 max-w-full object-contain"
+                    width={200} // Adjust width as needed
+                    height={200} // Adjust height as needed
                   />
                   {message.attachment.uploading && (
                     <div className="mt-1 text-xs text-blue-200">Uploading...</div>
