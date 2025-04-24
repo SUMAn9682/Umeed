@@ -47,7 +47,7 @@ function Navbar() {
   const navItems = [
     {
       name: "Dashboard",
-      href: "/",
+      href: "/dashboard",
       icon: <Home className="h-4 w-4 mr-1" />,
       auth: true,
     },
