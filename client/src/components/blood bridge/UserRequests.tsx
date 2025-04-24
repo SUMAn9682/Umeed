@@ -123,7 +123,7 @@ const RequestCard: React.FC<RequestCardProps> = ({
       </CardContent>
       <CardFooter className="justify-between items-center">
         <Link
-          href={`/blood-bridge/request/${request._id}`}
+          href={`/blood-bridge/request/${request._id}?t=${Date.now()}`}
           className="text-secondary flex items-center hover:underline font-semibold"
         >
           View details <ArrowRight className="w-4 h-4 ml-2" />
