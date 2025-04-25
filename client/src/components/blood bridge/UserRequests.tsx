@@ -122,7 +122,7 @@ const RequestCard: React.FC<RequestCardProps> = ({
           </div>
         </div>
       </CardContent>
-      <CardFooter className="justify-between items-center">
+      <CardFooter className="justify-between items-center grid grid-cols-1 md:grid-cols-2 gap-4">
         <Link
          href={`/blood-bridge/request/${request._id}`}
           className="text-primary flex items-center hover:underline font-semibold"
