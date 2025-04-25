@@ -1,4 +1,3 @@
-// components/umeed/ChatMessages.tsx
 "use client";
 
 import { useRef, useEffect } from "react";
@@ -19,40 +18,52 @@ const ChatMessage = ({ message }: ChatMessageProps) => {
   
   return (
     <div className={cn(
-      "flex gap-3 p-4",
-      isUser ? "bg-secondary/30" : "bg-background"
+      "flex w-full p-4",
+      isUser ? "justify-end" : "justify-start"
     )}>
-      <Avatar className={cn(
-        "h-8 w-8 flex items-center justify-center",
-        isUser ? "bg-primary" : "bg-blue-500"
+      <div className={cn(
+        "flex gap-3 max-w-[75%]"
       )}>
-        {isUser ? <User size={16} color="white" /> : <Bot size={16} color="white" />}
-      </Avatar>
-      
-      <div className="flex-1 overflow-hidden">
-        <p className="text-sm font-medium mb-1">
-          {isUser ? "You" : "Medical Assistant"}
-        </p>
-        {/* Display image if present */}
-        {message.attachment?.url && (
-                <div className="mb-2">
-                  <Image 
-                    src={message.attachment.url} 
-                    alt="Medical document" 
-                    className="rounded max-h-48 max-w-full object-contain"
-                    width={200} // Adjust width as needed
-                    height={200} // Adjust height as needed
-                  />
-                  {message.attachment.uploading && (
-                    <div className="mt-1 text-xs text-blue-200">Uploading...</div>
-                  )}
-                </div>
+        {!isUser && (
+          <Avatar className="h-8 w-8 flex-shrink-0 flex items-center justify-center bg-blue-500">
+            <Bot size={16} color="white" />
+          </Avatar>
+        )}
+        
+        <div className="overflow-hidden">
+          <p className={cn(
+            "text-sm font-medium mb-1 ",
+            isUser ? "text-right" : "text-left",
+            )}>
+            {isUser ? "You" : "Medical Assistant"}
+          </p>
+          {/* Display image if present */}
+          {message.attachment?.url && (
+            <div className="mb-2">
+              <Image 
+                src={message.attachment.url} 
+                alt="Medical document" 
+                className="rounded max-h-48 max-w-full object-contain"
+                width={200} // Adjust width as needed
+                height={200} // Adjust height as needed
+              />
+              {message.attachment.uploading && (
+                <div className="mt-1 text-xs text-blue-200">Uploading...</div>
               )}
-        <div className="prose prose-sm max-w-none">
-          <ReactMarkdown>
-            {message.content}
-          </ReactMarkdown>
+            </div>
+          )}
+          <div className={`prose prose-sm max-w-none ${isUser ? "bg-primary text-white/90 p-3 rounded-lg" : ""}`}>
+            <ReactMarkdown>
+              {message.content}
+            </ReactMarkdown>
+          </div>
         </div>
+        
+        {isUser && (
+          <Avatar className="h-8 w-8 flex-shrink-0 flex items-center justify-center bg-primary">
+            <User size={16} color="white" />
+          </Avatar>
+        )}
       </div>
     </div>
   );
