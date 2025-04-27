@@ -140,7 +140,7 @@ function Navbar() {
         "max-w-full overflow-x-hidden"
       )}
     >
-      <div className="flex items-center">
+      <div className="flex items-center pl-5">
         <Link href="/" className="flex items-center">
           <motion.span 
             className="bg-gradient-to-r from-primary via-purple-500 to-pink-400 bg-clip-text text-transparent font-bold text-2xl relative"

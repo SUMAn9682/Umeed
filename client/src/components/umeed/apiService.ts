@@ -40,12 +40,16 @@ export const chatApi = {
     },
 
     // Upload medical image
-    uploadMedicalImage: async (imageFile: File, sessionId?: string) => {
+    uploadMedicalImage: async (imageFile: File, sessionId?: string, message?: string) => {
       const formData = new FormData();
       formData.append('medicalImage', imageFile);
       
       if (sessionId) {
         formData.append('sessionId', sessionId);
+      }
+      
+      if (message?.trim()) {
+        formData.append('message', message);
       }
       
       const response = await api.post('/chat/upload-image', formData, {

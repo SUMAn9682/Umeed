@@ -142,7 +142,7 @@ function RequestForm() {
 
               <div className="space-y-4">
                 {/* Blood Group */}
-                <div>
+                <div className="space-y-1">
                   <Label htmlFor="bloodGroup">Blood Group *</Label>
                   <Select
                     onValueChange={(value) => handleChange("bloodGroup", value)}
@@ -165,7 +165,7 @@ function RequestForm() {
                 </div>
 
                 {/* Urgency */}
-                <div>
+                <div className="space-y-1">
                   <Label htmlFor="urgency">Urgency *</Label>
                   <Select
                     onValueChange={(value) => handleChange("urgency", value)}
@@ -188,7 +188,7 @@ function RequestForm() {
                 </div>
 
                 {/* Message */}
-                <div>
+                <div className="space-y-1">
                   <Label htmlFor="message">Message</Label>
                   <Input
                     type="text"
@@ -205,7 +205,7 @@ function RequestForm() {
 
                 {/* Contact Information */}
                 <div className="space-y-4">
-                  <div>
+                  <div className="space-y-1">
                     <Label htmlFor="phone">Phone *</Label>
                     <Input
                       type="tel"
@@ -219,7 +219,7 @@ function RequestForm() {
                       <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
                     )}
                   </div>
-                  <div>
+                  <div className="space-y-1">
                     <Label htmlFor="email">Email</Label>
                     <Input
                       type="email"
@@ -236,7 +236,7 @@ function RequestForm() {
 
                 {/* Address Fields */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                  <div>
+                  <div className="space-y-1">
                     <Label htmlFor="state">State *</Label>
                     <Select
                       onValueChange={(stateCode) => {
@@ -266,7 +266,7 @@ function RequestForm() {
                     )}
                   </div>
 
-                  <div>
+                  <div className="space-y-1">
                     <Label htmlFor="district">District *</Label>
                     <Input
                       type="text"
@@ -281,7 +281,7 @@ function RequestForm() {
                     )}
                   </div>
 
-                  <div>
+                  <div className="space-y-1">
                     <Label htmlFor="city">City *</Label>
                     <Select
                       onValueChange={(value) => handleChange("city", value)}
