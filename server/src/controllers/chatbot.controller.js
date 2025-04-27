@@ -89,7 +89,7 @@ const processImageUpload = async (req, res) => {
       return res.status(400).json({ error: 'No image file uploaded or processing failed' });
     }
 
-    const { sessionId } = req.body;
+    const { sessionId, message } = req.body;
     const user = req.user;
 
     // Access Cloudinary image data from req.file.cloudinary
@@ -115,8 +115,10 @@ const processImageUpload = async (req, res) => {
       });
     }
 
-    // Create a user message about the image upload
-    const userMessage = req.body.message ? req.body.message : "I've uploaded a medical document. Can you analyze it and explain what it says in simple terms?";
+    // Use the user's message if provided, otherwise use the default message
+    const userMessage = message && message.trim() !== "" 
+      ? message 
+      : "I've uploaded a medical document. Can you analyze it and explain what it says in simple terms?";
     
     // Add user message with attachment to the session
     session.messages.push({

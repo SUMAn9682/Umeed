@@ -23,21 +23,23 @@ export const ChatInput = () => {
     
     if (selectedFile) {
       // Handle file upload first if a file is selected
-      await uploadImage(selectedFile);
+      const currentMessage = message.trim()
+      await uploadImage(selectedFile, currentMessage || undefined);
       
       // Then send the text message if there is one
-      if (message.trim() && !isLoading) {
-        await sendMessage(message);
-        setMessage("");
-      }
+      // if (currentMessage && !isLoading) {
+      //   await sendMessage(currentMessage);
+      //   setMessage("");
+      // }
       
       // Reset file state
+      setMessage("");
       setSelectedFile(null);
       setPreviewImage(null);
       return;
     }
     
-    if (message.trim() && !isLoading) {
+    if (message.trim()  && !selectedFile && !isLoading) {
       // Handle text message only
       await sendMessage(message);
       setMessage("");

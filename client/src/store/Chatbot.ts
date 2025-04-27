@@ -19,7 +19,7 @@ interface ChatStore {
   deleteSession: (sessionId: string) => Promise<void>;
   updateSessionTitle: (sessionId: string, title: string) => Promise<void>;
   clearAllSessions: () => Promise<void>;
-  uploadImage: (imageFile: File) => Promise<void>;
+  uploadImage: (imageFile: File, message?: string) => Promise<void>;
 }
 
 export const useChatStore = create<ChatStore>((set, get) => ({
@@ -153,11 +153,14 @@ export const useChatStore = create<ChatStore>((set, get) => ({
   
 
 // Then add this implementation in the create function
-  uploadImage: async (imageFile: File) => {
+  uploadImage: async (imageFile: File, message?: string) => {
   const currentSession = get().currentSession;
   set({ isLoading: true, error: null });
   
   try {
+    const messageContent = message?.trim() 
+    ? message 
+    : "I've uploaded a medical document. Can you analyze it and explain what it says in simple terms?";
     // Optimistically update UI to show uploading state
     if (currentSession) {
       set({
@@ -167,7 +170,7 @@ export const useChatStore = create<ChatStore>((set, get) => ({
             ...currentSession.messages,
             { 
               role: 'user', 
-              content: "I've uploaded a medical document. Can you analyze it and explain what it says in simple terms?",
+              content: messageContent,
               attachment: { 
                 type: 'image',
                 url: URL.createObjectURL(imageFile),
@@ -180,7 +183,7 @@ export const useChatStore = create<ChatStore>((set, get) => ({
     }
     
     // Upload the image
-    const response = await chatApi.uploadMedicalImage(imageFile, currentSession?._id);
+    const response = await chatApi.uploadMedicalImage(imageFile, currentSession?._id, message);
     
     // Update with the response including the image
     set({
