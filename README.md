@@ -54,8 +54,8 @@ This serves both rural and urban populations facing healthcare barriers, particu
 - ✅ **Location-based Search**: Hierarchical location search algorithm prioritizing proximity for urgent needs
 ---
 ## 📽️ Demo & Deliverables
-- **Demo Video Link:** [YouTube Demo of Umeed](https://youtube.com/your-demo-link)  
-- **Pitch Deck Link:** [Umeed Presentation](https://docs.google.com/presentation/your-deck-link)  
+- **Demo Video Link:** [YouTube Demo of Umeed](https://youtu.be/Z_B_VadoCEE)  
+- **Pitch Deck Link:** [Umeed Presentation](https://drive.google.com/file/d/1LWMIAGksB0x1J-oi4ZPXuYVSGM_qNpIC/view?usp=sharing)  
 ---
 ## ✅ Tasks & Bonus Checklist
 - [✅] **All members of the team completed the mandatory task - Followed at least 2 of our social channels and filled the form**
@@ -73,7 +73,7 @@ This serves both rural and urban populations facing healthcare barriers, particu
 1. Clone this repository: 
 
 ```bash
-git clone https://github.com/yourusername/Umeed.git
+git clone https://github.com/soham247/Umeed.git
 ```
 
 2. Navigate to project directory
@@ -147,7 +147,7 @@ NEXT_PUBLIC_API_URL=http://localhost:8000
 ---
 ## 🧬 Future Scope
 - 🧠 **Custom ML Model Development**: Building our own machine learning model for more advanced disease prediction based on symptoms and medical history
-- 🗣️ **AI Receptionist**: Implementing intelligent agents to facilitate interactions between doctors and patients, managing appointments and initial consultations
+- 🗣️ **AI Receptionist**: Building Online Clinic where an AI agent serves as a virtual receptionist, seamlessly facilitating interactions between doctors and patients
 - 📊 **Health Analytics Dashboard**: Providing personalized health trends and insights based on user interactions and medical history
 - 🌐 **Regional Language Support**: Expanding accessibility with support for local languages
 - 📱 **Mobile Applications**: Native mobile apps for Android and iOS to increase accessibility
@@ -158,6 +158,8 @@ NEXT_PUBLIC_API_URL=http://localhost:8000
 - **Groq Documentation**: Reference for implementing document analysis features
 - **MongoDB Atlas**: Cloud database service for storing user and donation data
 - **Socket.io**: Real-time communication library
+- **Shadcn UI**: Component library that helped us build a beautiful and accessible user interface
+- **Cloudinary**: Cloud service used for uploading, storing, and optimizing medical document images
 - **HackHazards Organizing Team**: For their support and providing this opportunity
 
 ### Acknowledgements
